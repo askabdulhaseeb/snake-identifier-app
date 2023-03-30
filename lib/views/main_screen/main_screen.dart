@@ -5,6 +5,22 @@ class MainScreen extends StatelessWidget {
   static const String routeName = '/main';
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: Text('Main')));
+    return Scaffold(
+      appBar: AppBar(
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {},
+            child: const Text('Campare'),
+          ),
+        ],
+      ),
+      body: Center(
+        child: Text('Main'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
+      ),
+    );
   }
 }
