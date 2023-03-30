@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1015489538808",
+    "project_id": "snake-identifier-app",
+    "storage_bucket": "snake-identifier-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015489538808:android:303ff56fccafe815e9290d",
+        "android_client_info": {
+          "package_name": "com.example.snakeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1015489538808-7v46btntsjm5vv92uh713bvl1fe1i822.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBqPAO7AU-knHw-0g5V5InxLlPMYTbzY4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1015489538808-7v46btntsjm5vv92uh713bvl1fe1i822.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
