@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'providers/mail_auth_provider.dart';
 import 'views/auth/sign_in_screen.dart';
 import 'views/auth/sign_up_screen.dart';
+import 'views/main_screen/main_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         routes: <String, WidgetBuilder>{
           SignInScreen.routeName: (_) => const SignInScreen(),
           SignUpScreen.routeName: (_) => const SignUpScreen(),
+          MainScreen.routeName: (_) => const MainScreen(),
         },
       ),
     );

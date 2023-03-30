@@ -5,6 +5,7 @@ import '../../database/auth_methods.dart';
 import '../../database/user_api.dart';
 import '../../models/app_user.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
+import '../views/main_screen/main_screen.dart';
 
 class MailAuthProvider extends ChangeNotifier {
   onLogin(BuildContext context) async {
@@ -26,8 +27,8 @@ class MailAuthProvider extends ChangeNotifier {
     _isLoading = false;
     notifyListeners();
     // ignore: use_build_context_synchronously
-    // Navigator.of(context).pushNamedAndRemoveUntil(
-    //     DashboardScreen.routeName, (Route<dynamic> route) => false);
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        MainScreen.routeName, (Route<dynamic> route) => false);
   }
 
   register(BuildContext context) async {
@@ -54,8 +55,8 @@ class MailAuthProvider extends ChangeNotifier {
       return;
     }
     // ignore: use_build_context_synchronously
-    // Navigator.of(context).pushNamedAndRemoveUntil(
-    //     DashboardScreen.routeName, (Route<dynamic> route) => false);
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        MainScreen.routeName, (Route<dynamic> route) => false);
   }
 
   //

@@ -10,6 +10,7 @@ import '../../../widgets/custom_widgets/custom_textformfield.dart';
 import '../../../widgets/custom_widgets/password_textformfield.dart';
 import '../../../widgets/custom_widgets/show_loading.dart';
 import '../../providers/mail_auth_provider.dart';
+import '../main_screen/main_screen.dart';
 import 'sign_up_screen.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -146,8 +147,8 @@ class SignInScreen extends StatelessWidget {
                     CustomElevatedButton(
                       title: 'Skip Login for now',
                       onTap: () {
-                        // Navigator.of(context)
-                        //     .pushReplacementNamed(DashboardScreen.routeName);
+                        Navigator.of(context)
+                            .pushReplacementNamed(MainScreen.routeName);
                       },
                     ),
                     const SizedBox(height: 20),
