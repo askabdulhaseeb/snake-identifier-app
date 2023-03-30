@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../snakes/add_snake_screen.dart';
+
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
   static const String routeName = '/main';
@@ -18,7 +20,7 @@ class MainScreen extends StatelessWidget {
         child: Text('Main'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () =>Navigator.of(context).pushNamed(AddSnakeScreen.routeName),
         child: const Icon(Icons.add),
       ),
     );

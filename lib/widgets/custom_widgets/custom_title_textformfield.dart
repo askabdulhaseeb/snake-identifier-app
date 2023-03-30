@@ -55,30 +55,38 @@ class CustomTitleTextFormFieldState extends State<CustomTitleTextFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoFormRow(
-      prefix: Text(
-        widget.title,
-        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+    return Container(
+      padding: const EdgeInsets.all(2),
+      margin: const EdgeInsets.symmetric(vertical: 6),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.grey.shade300),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-      child: CupertinoTextFormFieldRow(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        initialValue: widget.initialValue,
-        controller: widget._controller,
-        readOnly: widget.readOnly,
-        keyboardType: widget.maxLines! > 1
-            ? TextInputType.multiline
-            : widget.keyboardType ?? TextInputType.text,
-        textInputAction: widget.maxLines! > 1
-            ? TextInputAction.newline
-            : widget.textInputAction ?? TextInputAction.next,
-        autofocus: widget.autoFocus,
-        onChanged: widget.onChanged,
-        maxLength: widget.maxLength,
-        minLines: widget.minLines,
-        maxLines: (widget._controller.text.isEmpty) ? 1 : widget.maxLines,
-        validator: (String? value) => widget.validator!(value),
-        cursorColor: Theme.of(context).colorScheme.primary,
+      child: CupertinoFormRow(
+        prefix: Text(
+          widget.title,
+          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+        child: CupertinoTextFormFieldRow(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          initialValue: widget.initialValue,
+          controller: widget._controller,
+          readOnly: widget.readOnly,
+          keyboardType: widget.maxLines! > 1
+              ? TextInputType.multiline
+              : widget.keyboardType ?? TextInputType.text,
+          textInputAction: widget.maxLines! > 1
+              ? TextInputAction.newline
+              : widget.textInputAction ?? TextInputAction.next,
+          autofocus: widget.autoFocus,
+          onChanged: widget.onChanged,
+          maxLength: widget.maxLength,
+          minLines: widget.minLines,
+          maxLines: (widget._controller.text.isEmpty) ? 1 : widget.maxLines,
+          validator: (String? value) => widget.validator!(value),
+          cursorColor: Theme.of(context).colorScheme.primary,
+        ),
       ),
     );
   }
