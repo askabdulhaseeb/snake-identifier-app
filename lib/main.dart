@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'database/auth_methods.dart';
 import 'firebase_options.dart';
 import 'providers/mail_auth_provider.dart';
 import 'providers/snake_provider.dart';
@@ -37,7 +38,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const SignInScreen(),
+        home: AuthMethods.getCurrentUser == null
+            ? const SignInScreen()
+            : const MainScreen(),
         routes: <String, WidgetBuilder>{
           SignInScreen.routeName: (_) => const SignInScreen(),
           SignUpScreen.routeName: (_) => const SignUpScreen(),

@@ -87,10 +87,37 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (_tag.text.trim().isEmpty) return;
+                        tags.add(_tag.text.trim());
+                        _tag.clear();
+                        setState(() {});
+                      },
                       icon: const Icon(Icons.done),
                     ),
                   ],
+                ),
+                Wrap(
+                  children: tags
+                      .map(
+                        (String e) => Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 4, horizontal: 12),
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 3, horizontal: 6),
+                          decoration: BoxDecoration(
+                              color: Theme.of(context)
+                                  .primaryColor
+                                  .withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Text(
+                            e,
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor),
+                          ),
+                        ),
+                      )
+                      .toList(),
                 ),
                 Row(
                   children: <Widget>[
@@ -101,10 +128,37 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (_property.text.trim().isEmpty) return;
+                        properties.add(_property.text.trim());
+                        _property.clear();
+                        setState(() {});
+                      },
                       icon: const Icon(Icons.done),
                     ),
                   ],
+                ),
+                Wrap(
+                  children: properties
+                      .map(
+                        (String e) => Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 4, horizontal: 12),
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 3, horizontal: 6),
+                          decoration: BoxDecoration(
+                              color: Theme.of(context)
+                                  .primaryColor
+                                  .withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Text(
+                            e,
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor),
+                          ),
+                        ),
+                      )
+                      .toList(),
                 ),
                 _isLoading
                     ? const ShowLoading()
@@ -150,6 +204,7 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
                           Navigator.of(context).pop();
                         },
                       ),
+                SizedBox(height: MediaQuery.of(context).size.height / 2)
               ],
             ),
           ),
