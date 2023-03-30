@@ -9,8 +9,13 @@ class SnakeProvider extends ChangeNotifier {
   }
 
   _init() async {
-    final List<Snake> temp = await SnakeAPI().allSnakes();
-    _snakes.addAll(temp);
+    try {
+      final List<Snake> temp = await SnakeAPI().allSnakes();
+      _snakes.clear();
+      _snakes.addAll(temp);
+    } catch (e) {
+      print('issue');
+    }
     notifyListeners();
   }
 
