@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Snakes Info',
         theme: ThemeData(
           primarySwatch: Colors.blue,

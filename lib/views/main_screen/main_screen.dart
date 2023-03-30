@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../models/snake.dart';
+import '../../providers/snake_provider.dart';
+import '../../widgets/snake/snakes_gridview.dart';
 import '../snakes/add_snake_screen.dart';
 
 class MainScreen extends StatelessWidget {
@@ -12,15 +16,23 @@ class MainScreen extends StatelessWidget {
         actions: <Widget>[
           TextButton(
             onPressed: () {},
-            child: const Text('Campare'),
+            child: const Text(
+              'Campare',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ],
       ),
-      body: Center(
-        child: Text('Main'),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Consumer<SnakeProvider>(
+          builder: (BuildContext context, SnakeProvider snakePro, _) =>
+              SnakesGridView(snakes: snakePro.snakes),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () =>Navigator.of(context).pushNamed(AddSnakeScreen.routeName),
+        onPressed: () =>
+            Navigator.of(context).pushNamed(AddSnakeScreen.routeName),
         child: const Icon(Icons.add),
       ),
     );

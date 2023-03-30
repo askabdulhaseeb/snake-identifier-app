@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../models/snake.dart';
+import '../../views/snakes/snake_detail_screen.dart';
 import '../custom_widgets/custom_network_image.dart';
 import '../custom_widgets/custom_shadow_bg_widget.dart';
 
@@ -14,6 +15,12 @@ class SnakeSmallTile extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute<SnakeDetailScreen>(
+              builder: (BuildContext context) =>
+                  SnakeDetailScreen(snake: snake),
+            ));
+          },
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.all(8),

@@ -84,7 +84,8 @@ class CustomTitleTextFormFieldState extends State<CustomTitleTextFormField> {
           maxLength: widget.maxLength,
           minLines: widget.minLines,
           maxLines: (widget._controller.text.isEmpty) ? 1 : widget.maxLines,
-          validator: (String? value) => widget.validator!(value),
+          validator: (String? value) =>
+              widget.validator == null ? null : widget.validator!(value),
           cursorColor: Theme.of(context).colorScheme.primary,
         ),
       ),

@@ -14,6 +14,10 @@ class SnakeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  refresh() async {
+    await _init();
+  }
+
   List<Snake> filterByName(String value) {
     return _snakes
         .where((Snake element) =>

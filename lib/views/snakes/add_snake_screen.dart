@@ -3,10 +3,12 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 
 import '../../database/snake_api.dart';
 import '../../enum/venomous_type.dart';
 import '../../models/snake.dart';
+import '../../providers/snake_provider.dart';
 import '../../utilities/custom_validator.dart';
 import '../../widgets/custom_widgets/custom_elevated_button.dart';
 import '../../widgets/custom_widgets/custom_file_image_box.dart';
@@ -133,7 +135,7 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
                           final Snake snake = Snake(
                             name: _name.text.trim(),
                             scientificName: _scientificName.text.trim(),
-                            imageURL: <String>[],
+                            imageURL: <String>[url!],
                             averageLengthCM:
                                 double.tryParse(_length.text.trim()) ?? 0.0,
                             tags: tags,
@@ -141,6 +143,9 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
                             properties: properties,
                           );
                           await SnakeAPI().add(snake);
+                          // ignore: use_build_context_synchronously
+                          Provider.of<SnakeProvider>(context, listen: false)
+                              .refresh();
                           // ignore: use_build_context_synchronously
                           Navigator.of(context).pop();
                         },
@@ -159,7 +164,9 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
     final FilePickerResult? temp = await FilePicker.platform
         .pickFiles(allowMultiple: false, type: FileType.image);
     if (temp == null) return;
-    file = File(temp.paths.first!);
+    setState(() {
+      file = File(temp.paths.first!);
+    });
   }
 
   Future<bool> _request() async {

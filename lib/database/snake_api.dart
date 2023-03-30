@@ -48,7 +48,7 @@ class SnakeAPI {
   Future<String?> uploadPhoto({required File file}) async {
     try {
       TaskSnapshot snapshot = await FirebaseStorage.instance
-          .ref('snakes/${AuthMethods.uid}')
+          .ref('snakes/${DateTime.now().microsecondsSinceEpoch}')
           .putFile(file);
       String url = await snapshot.ref.getDownloadURL();
       return url;
