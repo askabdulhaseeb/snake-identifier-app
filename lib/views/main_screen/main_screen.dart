@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/snake.dart';
 import '../../providers/snake_provider.dart';
 import '../../widgets/snake/snakes_gridview.dart';
 import '../snakes/add_snake_screen.dart';
+import '../snakes/snake_compare_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -15,7 +15,8 @@ class MainScreen extends StatelessWidget {
       appBar: AppBar(
         actions: <Widget>[
           TextButton(
-            onPressed: () {},
+            onPressed: () =>
+                Navigator.of(context).pushNamed(SnakeCompareScreen.routeName),
             child: const Text(
               'Campare',
               style: TextStyle(color: Colors.white),
