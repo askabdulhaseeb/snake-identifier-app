@@ -8,7 +8,7 @@ class AuthMethods {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
 
   static User? get getCurrentUser => _auth.currentUser;
-  static String get uid => _auth.currentUser?.uid ?? '';
+  static String get uid => _auth.currentUser?.uid ?? 'guest';
 
   Future<User?>? signupWithEmailAndPassword(
     String email,

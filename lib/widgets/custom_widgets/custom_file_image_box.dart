@@ -33,10 +33,10 @@ class CustomFileImageBox extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
                 child: file == null
                     ? Padding(
-                        padding: padding ?? EdgeInsets.zero,
+                        padding: padding ?? const EdgeInsets.all(16),
                         child: FittedBox(
                           child: Icon(
-                            Icons.person,
+                            Icons.image,
                             color: iconColor ?? Colors.white,
                           ),
                         ),

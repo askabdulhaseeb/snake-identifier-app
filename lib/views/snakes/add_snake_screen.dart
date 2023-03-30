@@ -1,12 +1,18 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../database/snake_api.dart';
 import '../../enum/venomous_type.dart';
 import '../../models/snake.dart';
 import '../../utilities/custom_validator.dart';
 import '../../widgets/custom_widgets/custom_elevated_button.dart';
+import '../../widgets/custom_widgets/custom_file_image_box.dart';
 import '../../widgets/custom_widgets/custom_textformfield.dart';
 import '../../widgets/custom_widgets/custom_title_textformfield.dart';
+import '../../widgets/custom_widgets/custom_toast.dart';
 import '../../widgets/custom_widgets/show_loading.dart';
 
 class AddSnakeScreen extends StatefulWidget {
@@ -31,6 +37,8 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
 
   final GlobalKey<FormState> key = GlobalKey<FormState>();
 
+  File? file;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +50,11 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
             key: key,
             child: Column(
               children: <Widget>[
+                const SizedBox(height: 20),
+                CustomFileImageBox(
+                  file: file,
+                  onTap: () => onImagePick(),
+                ),
                 CustomTitleTextFormField(
                   controller: _name,
                   title: 'Snake Name',
@@ -97,9 +110,26 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
                         title: 'Add Snake',
                         onTap: () async {
                           if (!key.currentState!.validate()) return;
+                          if (file == null) {
+                            CustomToast.errorToast(message: 'Select Photo');
+                            setState(() {
+                              _isLoading = false;
+                            });
+                            return;
+                          }
                           setState(() {
                             _isLoading = true;
                           });
+                          final String? url =
+                              await SnakeAPI().uploadPhoto(file: file!);
+                          if (file == null) {
+                            CustomToast.errorToast(
+                                message: 'Photo Upload issue');
+                            setState(() {
+                              _isLoading = false;
+                            });
+                            return;
+                          }
                           final Snake snake = Snake(
                             name: _name.text.trim(),
                             scientificName: _scientificName.text.trim(),
@@ -121,5 +151,20 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
         ),
       ),
     );
+  }
+
+  onImagePick() async {
+    final bool isGranted = await _request();
+    if (!isGranted) return null;
+    final FilePickerResult? temp = await FilePicker.platform
+        .pickFiles(allowMultiple: false, type: FileType.image);
+    if (temp == null) return;
+    file = File(temp.paths.first!);
+  }
+
+  Future<bool> _request() async {
+    await <Permission>[Permission.photos].request();
+    final PermissionStatus status1 = await Permission.photos.status;
+    return status1.isGranted;
   }
 }

@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 import '../models/snake.dart';
 import '../widgets/custom_widgets/custom_toast.dart';
+import 'auth_methods.dart';
 
 class SnakeAPI {
   static const String _collection = 'snakes';
@@ -26,7 +30,7 @@ class SnakeAPI {
     }
   }
 
-  Future<List<Snake>> allSnakes(Snake snake) async {
+  Future<List<Snake>> allSnakes() async {
     final List<Snake> snakes = <Snake>[];
     try {
       final QuerySnapshot<Map<String, dynamic>> docs =
@@ -39,5 +43,17 @@ class SnakeAPI {
       CustomToast.errorToast(message: e.toString());
     }
     return snakes;
+  }
+
+  Future<String?> uploadPhoto({required File file}) async {
+    try {
+      TaskSnapshot snapshot = await FirebaseStorage.instance
+          .ref('snakes/${AuthMethods.uid}')
+          .putFile(file);
+      String url = await snapshot.ref.getDownloadURL();
+      return url;
+    } catch (e) {
+      return null;
+    }
   }
 }

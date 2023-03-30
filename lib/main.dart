@@ -4,10 +4,12 @@ import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
 import 'providers/mail_auth_provider.dart';
+import 'providers/snake_provider.dart';
 import 'views/auth/sign_in_screen.dart';
 import 'views/auth/sign_up_screen.dart';
 import 'views/main_screen/main_screen.dart';
 import 'views/snakes/add_snake_screen.dart';
+import 'views/snakes/snake_compare_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +27,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<MailAuthProvider>.value(
           value: MailAuthProvider(),
         ),
+        ChangeNotifierProvider<SnakeProvider>(
+          create: (BuildContext context) => SnakeProvider(),
+        ),
       ],
       child: MaterialApp(
         title: 'Snakes Info',
@@ -37,6 +42,7 @@ class MyApp extends StatelessWidget {
           SignUpScreen.routeName: (_) => const SignUpScreen(),
           MainScreen.routeName: (_) => const MainScreen(),
           AddSnakeScreen.routeName: (_) => const AddSnakeScreen(),
+          SnakeCompareScreen.routeName: (_) => const SnakeCompareScreen(),
         },
       ),
     );
