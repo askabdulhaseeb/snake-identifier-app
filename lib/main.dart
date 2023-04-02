@@ -6,6 +6,7 @@ import 'database/auth_methods.dart';
 import 'firebase_options.dart';
 import 'providers/mail_auth_provider.dart';
 import 'providers/snake_provider.dart';
+import 'providers/user_provider.dart';
 import 'views/auth/sign_in_screen.dart';
 import 'views/auth/sign_up_screen.dart';
 import 'views/main_screen/main_screen.dart';
@@ -25,11 +26,14 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       // ignore: always_specify_types
       providers: [
-        ChangeNotifierProvider<MailAuthProvider>.value(
-          value: MailAuthProvider(),
+        ChangeNotifierProvider<UserProvider>(
+          create: (BuildContext context) => UserProvider(),
         ),
         ChangeNotifierProvider<SnakeProvider>(
           create: (BuildContext context) => SnakeProvider(),
+        ),
+        ChangeNotifierProvider<MailAuthProvider>.value(
+          value: MailAuthProvider(),
         ),
       ],
       child: MaterialApp(

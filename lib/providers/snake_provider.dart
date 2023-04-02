@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-
+import 'package:flutter/foundation.dart';
 import '../database/snake_api.dart';
 import '../models/snake.dart';
 
@@ -14,7 +13,9 @@ class SnakeProvider extends ChangeNotifier {
       _snakes.clear();
       _snakes.addAll(temp);
     } catch (e) {
-      print('issue');
+      if (kDebugMode) {
+        print('Snake Provider: Error - ${e.toString()}');
+      }
     }
     notifyListeners();
   }

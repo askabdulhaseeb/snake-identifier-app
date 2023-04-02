@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../database/auth_methods.dart';
+import '../../enum/user_role.dart';
+import '../../models/app_user.dart';
 import '../../providers/snake_provider.dart';
+import '../../providers/user_provider.dart';
 import '../../widgets/snake/snakes_gridview.dart';
 import '../snakes/add_snake_screen.dart';
 import '../snakes/snake_compare_screen.dart';
@@ -11,6 +15,10 @@ class MainScreen extends StatelessWidget {
   static const String routeName = '/main';
   @override
   Widget build(BuildContext context) {
+    final UserRole role = (Provider.of<UserProvider>(context, listen: false)
+                .user(AuthMethods.uid) ??
+            AppUser(uid: '', email: '', role: UserRole.user))
+        .role;
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
@@ -31,11 +39,13 @@ class MainScreen extends StatelessWidget {
               SnakesGridView(snakes: snakePro.snakes),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () =>
-            Navigator.of(context).pushNamed(AddSnakeScreen.routeName),
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: role == UserRole.user
+          ? null
+          : FloatingActionButton(
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(AddSnakeScreen.routeName),
+              child: const Icon(Icons.add),
+            ),
     );
   }
 }
