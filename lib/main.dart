@@ -12,6 +12,7 @@ import 'views/auth/sign_up_screen.dart';
 import 'views/main_screen/main_screen.dart';
 import 'views/snakes/add_snake_screen.dart';
 import 'views/snakes/snake_compare_screen.dart';
+import 'views/user_screens/user_search_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
           SignInScreen.routeName: (_) => const SignInScreen(),
           SignUpScreen.routeName: (_) => const SignUpScreen(),
           MainScreen.routeName: (_) => const MainScreen(),
+          UserSearchScreen.routeName: (_) => const UserSearchScreen(),
           AddSnakeScreen.routeName: (_) => const AddSnakeScreen(),
           SnakeCompareScreen.routeName: (_) => const SnakeCompareScreen(),
         },

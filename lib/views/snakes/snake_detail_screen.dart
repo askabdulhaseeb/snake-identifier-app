@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../models/snake.dart';
 import '../../widgets/custom_widgets/custom_url_slider.dart';
+import '../../widgets/custom_widgets/text_tag_widget.dart';
 
 class SnakeDetailScreen extends StatelessWidget {
   const SnakeDetailScreen({required this.snake, super.key});
@@ -46,23 +47,7 @@ class SnakeDetailScreen extends StatelessWidget {
                   const SizedBox(height: 6),
                   Wrap(
                     children: snake.tags
-                        .map(
-                          (String e) => Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 4, horizontal: 12),
-                            margin: const EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                                color: Theme.of(context)
-                                    .primaryColor
-                                    .withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Text(
-                              e,
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor),
-                            ),
-                          ),
-                        )
+                        .map((String e) => TextTagWidget(text: e))
                         .toList(),
                   ),
                   const SizedBox(height: 12),
@@ -73,23 +58,7 @@ class SnakeDetailScreen extends StatelessWidget {
                   const SizedBox(height: 6),
                   Wrap(
                     children: snake.properties
-                        .map(
-                          (String e) => Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 4, horizontal: 12),
-                            margin: const EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                                color: Theme.of(context)
-                                    .primaryColor
-                                    .withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Text(
-                              e,
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor),
-                            ),
-                          ),
-                        )
+                        .map((String e) => TextTagWidget(text: e))
                         .toList(),
                   ),
                 ],
@@ -101,3 +70,4 @@ class SnakeDetailScreen extends StatelessWidget {
     );
   }
 }
+

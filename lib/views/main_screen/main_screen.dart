@@ -9,6 +9,7 @@ import '../../providers/user_provider.dart';
 import '../../widgets/snake/snakes_gridview.dart';
 import '../snakes/add_snake_screen.dart';
 import '../snakes/snake_compare_screen.dart';
+import '../user_screens/user_search_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -24,7 +25,7 @@ class MainScreen extends StatelessWidget {
         actions: <Widget>[
           TextButton(
             onPressed: () =>
-                Navigator.of(context).pushNamed(SnakeCompareScreen.routeName),
+                Navigator.of(context).pushNamed(UserSearchScreen.routeName),
             child: const Text(
               'Campare',
               style: TextStyle(color: Colors.white),

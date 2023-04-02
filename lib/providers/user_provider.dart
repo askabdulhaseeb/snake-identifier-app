@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../database/auth_methods.dart';
 import '../database/user_api.dart';
 import '../models/app_user.dart';
 
@@ -14,10 +15,13 @@ class UserProvider extends ChangeNotifier {
   }
 
   List<AppUser> filterUser() {
+    final String me = AuthMethods.uid;
     return _users
-        .where((AppUser element) => (element.displayName)
-            .toLowerCase()
-            .contains(_searchText.trim().toLowerCase()))
+        .where((AppUser element) =>
+            (element.displayName)
+                .toLowerCase()
+                .contains(_searchText.trim().toLowerCase()) &&
+            element.uid != me)
         .toList();
   }
 
