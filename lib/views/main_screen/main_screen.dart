@@ -4,12 +4,9 @@ import 'package:provider/provider.dart';
 import '../../database/auth_methods.dart';
 import '../../enum/user_role.dart';
 import '../../models/app_user.dart';
-import '../../providers/snake_provider.dart';
 import '../../providers/user_provider.dart';
-import '../../widgets/snake/snakes_gridview.dart';
+import '../../widgets/dashboard/dashboard_gridview.dart';
 import '../snakes/add_snake_screen.dart';
-import '../snakes/snake_compare_screen.dart';
-import '../user_screens/user_search_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -22,22 +19,16 @@ class MainScreen extends StatelessWidget {
         .role;
     return Scaffold(
       appBar: AppBar(
-        actions: <Widget>[
-          TextButton(
-            onPressed: () =>
-                Navigator.of(context).pushNamed(UserSearchScreen.routeName),
-            child: const Text(
-              'Campare',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ],
+        title: const Text('Dashboard'),
+        centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Consumer<SnakeProvider>(
-          builder: (BuildContext context, SnakeProvider snakePro, _) =>
-              SnakesGridView(snakes: snakePro.snakes),
+      body: SingleChildScrollView(
+        child: Column(
+          children: const <Widget>[
+            SizedBox(height: 16),
+            DashboardGridview(),
+            SizedBox(height: 30),
+          ],
         ),
       ),
       floatingActionButton: role == UserRole.user
