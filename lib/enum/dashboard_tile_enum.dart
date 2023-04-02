@@ -5,7 +5,7 @@ import '../views/user_screens/user_search_screen.dart';
 enum DashboardTileEnum {
   snakes('Snakes', '', true, SnakesScreen.routeName),
   compare('Compare', '', true, SnakeCompareScreen.routeName),
-  emergeny('Emergency', '', false, ''),
+  emergeny('Emergency', '', false, '000'),
   comunity('Comunity', '', false, ''),
   user('Search User', '', true, UserSearchScreen.routeName);
 

@@ -21,6 +21,14 @@ class MainScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Dashboard'),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            onPressed: () async {
+              await AuthMethods().signOut(context);
+            },
+            icon: const Icon(Icons.logout),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import '../views/auth/sign_in_screen.dart';
 import '../widgets/custom_widgets/custom_toast.dart';
 
 class AuthMethods {
@@ -81,5 +82,8 @@ class AuthMethods {
 
   Future<void> signOut(BuildContext context) async {
     await _auth.signOut();
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        SignInScreen.routeName, (Route<dynamic> route) => false);
   }
 }

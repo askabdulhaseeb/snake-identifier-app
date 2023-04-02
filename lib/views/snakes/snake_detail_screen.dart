@@ -11,7 +11,20 @@ class SnakeDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(snake.name)),
+      appBar: AppBar(
+        title: Text(snake.name),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              //TODO: Edit Snake Screen
+            },
+            child: const Text(
+              'Edit Snake',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,4 +83,3 @@ class SnakeDetailScreen extends StatelessWidget {
     );
   }
 }
-
