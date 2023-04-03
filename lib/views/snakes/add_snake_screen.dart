@@ -16,6 +16,7 @@ import '../../widgets/custom_widgets/custom_textformfield.dart';
 import '../../widgets/custom_widgets/custom_title_textformfield.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
 import '../../widgets/custom_widgets/show_loading.dart';
+import '../../widgets/custom_widgets/text_tag_widget.dart';
 
 class AddSnakeScreen extends StatefulWidget {
   const AddSnakeScreen({super.key});
@@ -40,6 +41,14 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
   final GlobalKey<FormState> key = GlobalKey<FormState>();
 
   File? file;
+
+  List<VenomousLevel> venomous = <VenomousLevel>[
+    VenomousLevel.dangerouslyVenomous,
+    VenomousLevel.mildlyVenomous,
+    VenomousLevel.cautionVenomous,
+    VenomousLevel.venomous,
+    VenomousLevel.nonVenomous,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +87,63 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
                   readOnly: _isLoading,
                   validator: (String? value) => CustomValidator.isEmpty(value),
                 ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: Colors.grey.shade300,
+                    ),
+                  ),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const SizedBox(height: 8),
+                        const Text(
+                          'Venomous Level',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Text(
+                          'Tap to switch the Venomous Level',
+                          style: TextStyle(fontSize: 11, color: Colors.grey),
+                        ),
+                        const SizedBox(height: 8),
+                        Wrap(
+                          alignment: WrapAlignment.start,
+                          children: venomous
+                              .map((VenomousLevel e) => GestureDetector(
+                                    onTap: () => setState(() {
+                                      level = e;
+                                    }),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(12),
+                                      margin: const EdgeInsets.only(
+                                          right: 8, bottom: 8),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          color: e == level
+                                              ? Theme.of(context).primaryColor
+                                              : Colors.grey.shade300,
+                                        ),
+                                      ),
+                                      child: Text(
+                                        e.title,
+                                        style: TextStyle(color: e.color),
+                                      ),
+                                    ),
+                                  ))
+                              .toList(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 Row(
                   children: <Widget>[
                     Expanded(
@@ -98,26 +164,9 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
                   ],
                 ),
                 Wrap(
-                  children: tags
-                      .map(
-                        (String e) => Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 4, horizontal: 12),
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 3, horizontal: 6),
-                          decoration: BoxDecoration(
-                              color: Theme.of(context)
-                                  .primaryColor
-                                  .withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Text(
-                            e,
-                            style: TextStyle(
-                                color: Theme.of(context).primaryColor),
-                          ),
-                        ),
-                      )
-                      .toList(),
+                  alignment: WrapAlignment.start,
+                  children:
+                      tags.map((String e) => TextTagWidget(text: e)).toList(),
                 ),
                 Row(
                   children: <Widget>[
@@ -140,24 +189,7 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
                 ),
                 Wrap(
                   children: properties
-                      .map(
-                        (String e) => Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 4, horizontal: 12),
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 3, horizontal: 6),
-                          decoration: BoxDecoration(
-                              color: Theme.of(context)
-                                  .primaryColor
-                                  .withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Text(
-                            e,
-                            style: TextStyle(
-                                color: Theme.of(context).primaryColor),
-                          ),
-                        ),
-                      )
+                      .map((String e) => TextTagWidget(text: e))
                       .toList(),
                 ),
                 _isLoading

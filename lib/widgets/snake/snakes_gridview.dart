@@ -12,15 +12,15 @@ class SnakesGridView extends StatelessWidget {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        crossAxisSpacing: 6,
-        mainAxisSpacing: 6,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 8,
         childAspectRatio: 4 / 5,
       ),
       primary: false,
       shrinkWrap: true,
       itemCount: snakes.length,
       itemBuilder: (BuildContext context, int index) =>
-          SnakeSmallTile(snake: snakes[index]),
+          SnakeSmallTile(snake: snakes[index], index: index),
     );
   }
 }

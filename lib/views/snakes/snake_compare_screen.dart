@@ -24,62 +24,62 @@ class _SnakeCompareScreenState extends State<SnakeCompareScreen> {
       )),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: <Widget>[
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () async {
-                    final Snake? temp = await showDialog<Snake?>(
-                      context: context,
-                      builder: (BuildContext context) =>
-                          const SnakeSearchWidget(),
-                    );
-                    if (temp != null) {
-                      setState(() {
-                        snake1 = temp;
-                      });
-                    }
-                  },
-                  child: SelectSnakeWidget(
-                    title: 'Select 1st',
-                    snake: snake1,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () async {
+                      final Snake? temp = await showDialog<Snake?>(
+                        context: context,
+                        builder: (BuildContext context) =>
+                            const SnakeSearchWidget(),
+                      );
+                      if (temp != null) {
+                        setState(() {
+                          snake1 = temp;
+                        });
+                      }
+                    },
+                    child: SelectSnakeWidget(
+                      title: 'Select 1st',
+                      snake: snake1,
+                    ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () async {
-                    final Snake? temp = await showDialog<Snake?>(
-                      context: context,
-                      builder: (BuildContext context) =>
-                          const SnakeSearchWidget(),
-                    );
-                    if (temp != null) {
-                      setState(() {
-                        snake2 = temp;
-                      });
-                    }
-                  },
-                  child: SelectSnakeWidget(
-                    title: 'Select 2nd',
-                    snake: snake2,
+                  GestureDetector(
+                    onTap: () async {
+                      final Snake? temp = await showDialog<Snake?>(
+                        context: context,
+                        builder: (BuildContext context) =>
+                            const SnakeSearchWidget(),
+                      );
+                      if (temp != null) {
+                        setState(() {
+                          snake2 = temp;
+                        });
+                      }
+                    },
+                    child: SelectSnakeWidget(
+                      title: 'Select 2nd',
+                      snake: snake2,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            const Padding(
-              padding: EdgeInsets.all(24),
-              child: Divider(color: Colors.grey),
-            ),
-            snake1 == null || snake2 == null
-                ? const Center(
-                    child: Text(
-                    'Select Both snake to Compare',
-                    style: TextStyle(color: Colors.grey),
-                  ))
-                : SingleChildScrollView(
-                    child: Column(
+                ],
+              ),
+              const Padding(
+                padding: EdgeInsets.all(24),
+                child: Divider(color: Colors.grey),
+              ),
+              snake1 == null || snake2 == null
+                  ? const Center(
+                      child: Text(
+                      'Select Both snake to Compare',
+                      style: TextStyle(color: Colors.grey),
+                    ))
+                  : Column(
                       children: <Widget>[
                         Text(
                           'Basic',
@@ -96,15 +96,35 @@ class _SnakeCompareScreenState extends State<SnakeCompareScreen> {
                         _Length(snake1: snake1, snake2: snake2),
                         const SizedBox(height: 16),
                         Text(
+                          'Venomous Level',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Text(
+                              snake1!.level.title,
+                              style: TextStyle(color: snake1!.level.color),
+                            ),
+                            Text(
+                              snake2!.level.title,
+                              style: TextStyle(color: snake2!.level.color),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
                           'Properties',
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                         const SizedBox(height: 10),
                         _Properties(snake1: snake1, snake2: snake2),
+                        const SizedBox(height: 40),
                       ],
                     ),
-                  ),
-          ],
+            ],
+          ),
         ),
       ),
     );
