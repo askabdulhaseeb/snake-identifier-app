@@ -27,6 +27,20 @@ class AppUser {
     };
   }
 
+  updateRole() {
+    return <String, dynamic>{
+      'role': role.json,
+    };
+  }
+
+  toggleUser() {
+    if (role == UserRole.user) {
+      role = UserRole.admin;
+    } else {
+      role = UserRole.user;
+    }
+  }
+
   // ignore: sort_constructors_first
   factory AppUser.fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
     return AppUser(

@@ -34,12 +34,14 @@ class UserProvider extends ChangeNotifier {
   String _searchText = '';
 
   Future<void> refresh() async {
-    _users.addAll(await UserAPI().getAllUsers());
+    _users.clear();
+    _init();
     notifyListeners();
   }
 
   _init() async {
-    _users.addAll(await UserAPI().getAllUsers());
+    final List<AppUser> temp = await UserAPI().getAllUsers();
+    _users.addAll(temp);
     notifyListeners();
   }
 

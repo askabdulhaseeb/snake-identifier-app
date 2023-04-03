@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../enum/dashboard_tile_enum.dart';
 import '../custom_widgets/custom_shadow_bg_widget.dart';
+
+Future<void> launchURL(Uri uri) async {
+  if (!await launchUrl(uri)) {
+    throw Exception('Could not launch');
+  }
+}
 
 class DashboardTile extends StatelessWidget {
   const DashboardTile({required this.tile, required this.index, super.key});
@@ -15,9 +22,13 @@ class DashboardTile extends StatelessWidget {
           ? const EdgeInsets.only(left: 16)
           : const EdgeInsets.only(right: 16),
       child: GestureDetector(
-        onTap: () {
+        onTap: () async {
           if (tile.hasScreen) {
             Navigator.of(context).pushNamed(tile.routeName);
+          } else if (tile == DashboardTileEnum.emergeny) {
+            await launchURL(Uri(scheme: 'tel', path: tile.routeName));
+          } else {
+            await launchURL(Uri.parse('https://devmarkaz.com'));
           }
         },
         child: CustomShadowBgWidget(

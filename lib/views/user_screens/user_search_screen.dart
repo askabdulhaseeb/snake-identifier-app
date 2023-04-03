@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../database/auth_methods.dart';
+import '../../database/user_api.dart';
 import '../../enum/user_role.dart';
 import '../../models/app_user.dart';
 import '../../providers/user_provider.dart';
@@ -48,40 +49,49 @@ class _UserTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomShadowBgWidget(
-      child: Row(
-        children: <Widget>[
-          CustomProfileImage(imageURL: user.imageURL),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  user.displayName,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                if (myRole == UserRole.superAdmin)
-                  SelectableText(
-                    user.email,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: CustomShadowBgWidget(
+        child: Row(
+          children: <Widget>[
+            CustomProfileImage(imageURL: user.imageURL),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    user.displayName,
                     maxLines: 1,
-                    style: const TextStyle(color: Colors.grey),
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-              ],
+                  if (myRole == UserRole.superAdmin)
+                    SelectableText(
+                      user.email,
+                      maxLines: 1,
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                ],
+              ),
             ),
-          ),
-          myRole == UserRole.superAdmin
-              ? ElevatedButton(
-                  onPressed: () {},
-                  child: Text(user.role == UserRole.superAdmin ||
-                          user.role == UserRole.user
-                      ? 'Make user Admin'
-                      : 'Make him User'),
-                )
-              : TextTagWidget(text: user.role.title)
-        ],
+            myRole == UserRole.superAdmin
+                ? ElevatedButton(
+                    onPressed: () async {
+                      user.toggleUser();
+                      await UserAPI().updateRole(user);
+                      // ignore: use_build_context_synchronously
+                      await Provider.of<UserProvider>(context, listen: false)
+                          .refresh();
+                    },
+                    child: Text(user.role == UserRole.superAdmin ||
+                            user.role == UserRole.user
+                        ? 'Make user Admin'
+                        : 'Make him User'),
+                  )
+                : TextTagWidget(text: user.role.title)
+          ],
+        ),
       ),
     );
   }

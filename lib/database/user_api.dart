@@ -40,6 +40,13 @@ class UserAPI {
     return appUser;
   }
 
+  Future<void> updateRole(AppUser value) async {
+    await _instance
+        .collection(_collection)
+        .doc(value.uid)
+        .update(value.updateRole());
+  }
+
   Future<String?> uploadProfilePhoto({required File file}) async {
     try {
       TaskSnapshot snapshot = await FirebaseStorage.instance
