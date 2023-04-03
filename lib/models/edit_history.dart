@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../database/auth_methods.dart';
+
 class EditHistory {
   EditHistory({
-    required this.uid,
+    String? uid,
     DateTime? timestamp,
-  }) : timestamp = timestamp ?? DateTime.now();
+  })  : uid = uid ?? AuthMethods.uid,
+        timestamp = timestamp ?? DateTime.now();
 
   final String uid;
   final DateTime timestamp;
@@ -17,10 +20,10 @@ class EditHistory {
   }
 
   // ignore: sort_constructors_first
-  factory EditHistory.fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
+  factory EditHistory.fromMap(Map<String, dynamic> map) {
     return EditHistory(
-      uid: doc.data()?['uid'] ?? '',
-      timestamp: doc.data()?['timestamp'] ?? 0,
+      uid: map['uid'] ?? '',
+      timestamp: DateTime.fromMillisecondsSinceEpoch(map['timestamp'] ?? 0),
     );
   }
 }

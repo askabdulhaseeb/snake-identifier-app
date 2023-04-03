@@ -5,7 +5,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 import '../models/snake.dart';
 import '../widgets/custom_widgets/custom_toast.dart';
-import 'auth_methods.dart';
 
 class SnakeAPI {
   static const String _collection = 'snakes';
@@ -13,7 +12,18 @@ class SnakeAPI {
   // functions
   Future<void> add(Snake snake) async {
     try {
-      await _instance.collection(_collection).doc().set(snake.toMap());
+      await _instance.collection(_collection).doc(snake.sid).set(snake.toMap());
+    } catch (e) {
+      CustomToast.errorToast(message: e.toString());
+    }
+  }
+
+  Future<void> updateSnake(Snake snake) async {
+    try {
+      await _instance
+          .collection(_collection)
+          .doc(snake.sid)
+          .update(snake.updateSnake());
     } catch (e) {
       CustomToast.errorToast(message: e.toString());
     }

@@ -13,23 +13,27 @@ class Snake {
     required this.tags,
     required this.level,
     required this.properties,
+    String? sid,
     String? uploadedBy,
     List<EditHistory>? history,
-  })  : uploadedBy = uploadedBy ?? AuthMethods.uid,
+  })  : sid = sid ?? AuthMethods.uniqueID,
+        uploadedBy = uploadedBy ?? AuthMethods.uid,
         history = history ?? <EditHistory>[];
 
-  final String name;
-  final String scientificName;
+  final String sid;
+  String name;
+  String scientificName;
   final List<String> imageURL;
-  final double averageLengthCM;
-  final List<String> tags;
-  final VenomousLevel level;
-  final List<String> properties;
+  double averageLengthCM;
+  List<String> tags;
+  VenomousLevel level;
+  List<String> properties;
   final String uploadedBy;
   final List<EditHistory> history;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'sid': sid,
       'name': name,
       'scientific_name': scientificName,
       'image_url': imageURL,
@@ -41,15 +45,27 @@ class Snake {
       'history': history.map((EditHistory e) => e.toMap()).toList(),
     };
   }
+  Map<String, dynamic> updateSnake() {
+    return <String, dynamic>{
+      'name': name,
+      'scientific_name': scientificName,
+      'average_length_cm': averageLengthCM,
+      'tags': tags,
+      'level': level.json,
+      'properties': properties,
+      'history': history.map((EditHistory e) => e.toMap()).toList(),
+    };
+  }
 
   // ignore: sort_constructors_first
   factory Snake.fromMap(DocumentSnapshot<Map<String, dynamic>> doc) {
     final List<dynamic> data = doc.data()?['history'] ?? <dynamic>[];
     final List<EditHistory> editHistory = <EditHistory>[];
     for (dynamic element in data) {
-      editHistory.add(EditHistory.fromDoc(element));
+      editHistory.add(EditHistory.fromMap(element));
     }
     return Snake(
+      sid: doc.data()?['sid'] ?? '',
       name: doc.data()?['name'] ?? '',
       uploadedBy: doc.data()?['name'] ?? 'uploaded_by',
       scientificName: doc.data()?['scientific_name'] ?? '',

@@ -10,6 +10,8 @@ class AuthMethods {
 
   static User? get getCurrentUser => _auth.currentUser;
   static String get uid => _auth.currentUser?.uid ?? 'guest';
+  static String get uniqueID =>
+      '''${_auth.currentUser?.uid ?? 'null'}${DateTime.now().microsecondsSinceEpoch}''';
 
   Future<User?>? signupWithEmailAndPassword(
     String email,

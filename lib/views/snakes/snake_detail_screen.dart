@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../models/snake.dart';
 import '../../widgets/custom_widgets/custom_url_slider.dart';
 import '../../widgets/custom_widgets/text_tag_widget.dart';
+import 'edit_snake_screen.dart';
 
 class SnakeDetailScreen extends StatelessWidget {
   const SnakeDetailScreen({required this.snake, super.key});
@@ -16,7 +17,10 @@ class SnakeDetailScreen extends StatelessWidget {
         actions: <Widget>[
           TextButton(
             onPressed: () {
-              //TODO: Edit Snake Screen
+              Navigator.of(context).push(MaterialPageRoute<EditSnakeScreen>(
+                builder: (BuildContext context) =>
+                    EditSnakeScreen(snake: snake),
+              ));
             },
             child: const Text(
               'Edit Snake',
