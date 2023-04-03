@@ -44,11 +44,11 @@ class DashboardTile extends StatelessWidget {
               ),
               child: Column(
                 children: <Widget>[
-                  const Expanded(
+                  Expanded(
                     child: SizedBox(
                       height: double.infinity,
                       width: double.infinity,
-                      child: Text('Image'),
+                      child: Image.asset(tile.image),
                     ),
                   ),
                   Text(
