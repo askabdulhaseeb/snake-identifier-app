@@ -57,6 +57,24 @@ class SnakeDetailScreen extends StatelessWidget {
                   Text('Average Length: ${snake.averageLengthCM}cm'),
                   const SizedBox(height: 8),
                   const Divider(),
+                  Row(
+                    children: <Widget>[
+                      const Text(
+                        'Venomous Level: ',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Expanded(
+                        child: Text(
+                          snake.level.title,
+                          style: TextStyle(
+                            color: snake.level.color,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
                   const Text(
                     'Tags',
                     style: TextStyle(fontWeight: FontWeight.bold),
