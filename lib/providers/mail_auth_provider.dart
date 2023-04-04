@@ -16,12 +16,16 @@ class MailAuthProvider extends ChangeNotifier {
         .loginWithEmailAndPassword(_email.text.trim(), _password.text.trim());
     if (user == null) {
       CustomToast.errorToast(message: 'Invalid email or password');
+      _isLoading = false;
+      notifyListeners();
       return;
     }
     final AppUser? appUser = await UserAPI().user(uid: user.uid);
     if (appUser == null) {
       CustomToast.errorToast(
           message: 'Something wents wrong, please contact support');
+      _isLoading = false;
+      notifyListeners();
       return;
     }
     _isLoading = false;
