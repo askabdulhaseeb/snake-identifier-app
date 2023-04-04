@@ -34,6 +34,7 @@ class AppUser {
   }
 
   toggleUser() {
+    if (role == UserRole.superAdmin) return;
     if (role == UserRole.user) {
       role = UserRole.admin;
     } else {

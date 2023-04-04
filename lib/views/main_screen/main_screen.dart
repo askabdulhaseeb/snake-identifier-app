@@ -42,8 +42,9 @@ class MainScreen extends StatelessWidget {
       floatingActionButton: role == UserRole.user
           ? null
           : FloatingActionButton(
-              onPressed: () =>
-                  Navigator.of(context).pushNamed(AddSnakeScreen.routeName),
+              onPressed: () => AuthMethods.getCurrentUser == null
+                  ? null
+                  : Navigator.of(context).pushNamed(AddSnakeScreen.routeName),
               child: const Icon(Icons.add),
             ),
     );

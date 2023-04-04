@@ -95,29 +95,6 @@ class SignInScreen extends StatelessWidget {
                                         onTap: () =>
                                             mailAuthPro.onLogin(context),
                                       ),
-                                Row(
-                                  children: <Widget>[
-                                    Expanded(
-                                      child: Container(
-                                        height: 1,
-                                        color: Theme.of(context).dividerColor,
-                                      ),
-                                    ),
-                                    Text(
-                                      '  OR  ',
-                                      style: TextStyle(
-                                        color: Theme.of(context).dividerColor,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        width: double.infinity,
-                                        height: 1,
-                                        color: Theme.of(context).dividerColor,
-                                      ),
-                                    ),
-                                  ],
-                                ),
                                 const SizedBox(height: 16),
                               ],
                             ),

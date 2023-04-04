@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../enum/dashboard_tile_enum.dart';
+import '../../providers/app_theme.dart';
 import '../custom_widgets/custom_shadow_bg_widget.dart';
 
 Future<void> launchURL(Uri uri) async {
@@ -27,8 +29,10 @@ class DashboardTile extends StatelessWidget {
             Navigator.of(context).pushNamed(tile.routeName);
           } else if (tile == DashboardTileEnum.emergeny) {
             await launchURL(Uri(scheme: 'tel', path: tile.routeName));
+          } else if (tile == DashboardTileEnum.theme) {
+            Provider.of<AppThemeProvider>(context, listen: false).toggleTheme();
           } else {
-            await launchURL(Uri.parse('https://devmarkaz.com'));
+            await launchURL(Uri.parse(tile.routeName));
           }
         },
         child: CustomShadowBgWidget(
@@ -59,18 +63,52 @@ class DashboardTile extends StatelessWidget {
                     child: SizedBox(
                       height: double.infinity,
                       width: double.infinity,
-                      child: Image.asset(tile.image),
+                      child: tile == DashboardTileEnum.theme
+                          ? Consumer<AppThemeProvider>(builder:
+                              (BuildContext context, AppThemeProvider theme,
+                                  _) {
+                              return FittedBox(
+                                child: Icon(
+                                  theme.themeMode == ThemeMode.system
+                                      ? Icons.hdr_auto
+                                      : theme.themeMode == ThemeMode.light
+                                          ? Icons.light_mode
+                                          : Icons.dark_mode,
+                                  color: Colors.black,
+                                ),
+                              );
+                            })
+                          : Image.asset(tile.image),
                     ),
                   ),
-                  Text(
-                    tile.title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+                  tile == DashboardTileEnum.theme
+                      ? Consumer<AppThemeProvider>(builder:
+                          (BuildContext context, AppThemeProvider theme, _) {
+                          return Text(
+                            theme.themeMode == ThemeMode.system
+                                ? 'System Theme Mode'
+                                : theme.themeMode == ThemeMode.dark
+                                    ? 'Dark Mode'
+                                    : 'Loght Mode',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          );
+                        })
+                      : Text(
+                          tile.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                 ],
               ),
             ),

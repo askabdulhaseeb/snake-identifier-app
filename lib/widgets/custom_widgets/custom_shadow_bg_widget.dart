@@ -14,7 +14,7 @@ class CustomShadowBgWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: Colors.grey.shade400,
+            color: Theme.of(context).dividerColor,
             blurRadius: 4.0, // soften the shadow
             spreadRadius: 1.0, //extend the shadow
             offset: const Offset(

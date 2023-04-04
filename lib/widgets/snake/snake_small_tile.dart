@@ -79,7 +79,10 @@ class SnakeSmallTile extends StatelessWidget {
                           snake.name,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontSize: 18),
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                          ),
                         ),
                         Text(
                           snake.scientificName,

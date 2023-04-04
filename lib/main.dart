@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'database/auth_methods.dart';
+import 'database/lcaol_data.dart';
 import 'firebase_options.dart';
+import 'providers/app_theme.dart';
 import 'providers/mail_auth_provider.dart';
 import 'providers/snake_provider.dart';
 import 'providers/user_provider.dart';
@@ -18,6 +20,7 @@ import 'views/user_screens/user_search_screen.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await LocalData.init();
   runApp(const MyApp());
 }
 
@@ -37,26 +40,32 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<MailAuthProvider>.value(
           value: MailAuthProvider(),
         ),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Snakes Info',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+        ChangeNotifierProvider<AppThemeProvider>.value(
+          value: AppThemeProvider(),
         ),
-        home: AuthMethods.getCurrentUser == null
-            ? const SignInScreen()
-            : const MainScreen(),
-        routes: <String, WidgetBuilder>{
-          SignInScreen.routeName: (_) => const SignInScreen(),
-          SignUpScreen.routeName: (_) => const SignUpScreen(),
-          MainScreen.routeName: (_) => const MainScreen(),
-          UserSearchScreen.routeName: (_) => const UserSearchScreen(),
-          SnakesScreen.routeName: (_) => const SnakesScreen(),
-          AddSnakeScreen.routeName: (_) => const AddSnakeScreen(),
-          SnakeCompareScreen.routeName: (_) => const SnakeCompareScreen(),
-        },
-      ),
+      ],
+      child: Consumer<AppThemeProvider>(
+          builder: (BuildContext context, AppThemeProvider themePro, _) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Snakes Info',
+          theme: AppThemes.light,
+          darkTheme: AppThemes.dark,
+          themeMode: themePro.themeMode,
+          home: AuthMethods.getCurrentUser == null
+              ? const SignInScreen()
+              : const MainScreen(),
+          routes: <String, WidgetBuilder>{
+            SignInScreen.routeName: (_) => const SignInScreen(),
+            SignUpScreen.routeName: (_) => const SignUpScreen(),
+            MainScreen.routeName: (_) => const MainScreen(),
+            UserSearchScreen.routeName: (_) => const UserSearchScreen(),
+            SnakesScreen.routeName: (_) => const SnakesScreen(),
+            AddSnakeScreen.routeName: (_) => const AddSnakeScreen(),
+            SnakeCompareScreen.routeName: (_) => const SnakeCompareScreen(),
+          },
+        );
+      }),
     );
   }
 }

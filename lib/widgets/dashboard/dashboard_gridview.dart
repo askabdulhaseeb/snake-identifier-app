@@ -14,6 +14,7 @@ class DashboardGridview extends StatelessWidget {
       DashboardTileEnum.emergeny,
       DashboardTileEnum.comunity,
       DashboardTileEnum.user,
+      DashboardTileEnum.theme,
     ];
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

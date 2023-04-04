@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../database/auth_methods.dart';
 import '../../models/snake.dart';
 import '../../widgets/custom_widgets/custom_url_slider.dart';
 import '../../widgets/custom_widgets/text_tag_widget.dart';
@@ -15,18 +16,21 @@ class SnakeDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(snake.name),
         actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute<EditSnakeScreen>(
-                builder: (BuildContext context) =>
-                    EditSnakeScreen(snake: snake),
-              ));
-            },
-            child: const Text(
-              'Edit Snake',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
+          AuthMethods.getCurrentUser == null
+              ? const SizedBox()
+              : TextButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute<EditSnakeScreen>(
+                      builder: (BuildContext context) =>
+                          EditSnakeScreen(snake: snake),
+                    ));
+                  },
+                  child: const Text(
+                    'Edit Snake',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
         ],
       ),
       body: SingleChildScrollView(

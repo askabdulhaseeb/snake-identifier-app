@@ -89,6 +89,7 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
+                  margin: const EdgeInsets.symmetric(vertical: 6),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
@@ -178,6 +179,7 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
                         .toList(),
                   ),
                 ),
+                const SizedBox(height: 12),
                 Row(
                   children: <Widget>[
                     Expanded(

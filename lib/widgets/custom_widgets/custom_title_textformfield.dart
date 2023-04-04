@@ -81,6 +81,7 @@ class CustomTitleTextFormFieldState extends State<CustomTitleTextFormField> {
               : widget.textInputAction ?? TextInputAction.next,
           autofocus: widget.autoFocus,
           onChanged: widget.onChanged,
+          style: Theme.of(context).textTheme.bodyMedium,
           maxLength: widget.maxLength,
           minLines: widget.minLines,
           maxLines: (widget._controller.text.isEmpty) ? 1 : widget.maxLines,
