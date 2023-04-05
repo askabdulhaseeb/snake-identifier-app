@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../database/auth_methods.dart';
 
 class EditHistory {

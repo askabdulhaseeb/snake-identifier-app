@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../database/auth_methods.dart';
 import '../../database/snake_api.dart';
 import '../../enum/venomous_type.dart';
 import '../../models/edit_history.dart';

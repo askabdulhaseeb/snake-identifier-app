@@ -55,7 +55,7 @@ class SignInScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    CustomShadowBgWidget(
+                     CustomShadowBgWidget(
                       child: Consumer<MailAuthProvider>(
                         builder: (
                           BuildContext context,

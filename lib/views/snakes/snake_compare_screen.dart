@@ -247,40 +247,44 @@ class SelectSnakeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 120,
-      width: 120,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor.withOpacity(0.1),
-        border: Border.all(
-          color: Theme.of(context).primaryColor,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        height: 120,
+        width: 120,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: Theme.of(context).primaryColor.withOpacity(0.1),
+          border: Border.all(
+            color: Theme.of(context).primaryColor,
+          ),
         ),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: snake != null
-            ? SizedBox(
-                height: double.infinity,
-                width: double.infinity,
-                child: CustomNetworkImage(imageURL: snake?.imageURL[0] ?? ''),
-              )
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    title,
-                    style: TextStyle(color: Theme.of(context).primaryColor),
-                  ),
-                  const Text(
-                    'Tap to choose',
-                    style: TextStyle(
-                      fontSize: 11,
-                      color: Colors.grey,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: snake != null
+              ? SizedBox(
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: CustomNetworkImage(imageURL: snake?.imageURL[0] ?? ''),
+                )
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      title,
+                      style: TextStyle(color: Theme.of(context).primaryColor),
                     ),
-                  ),
-                ],
-              ),
+                    const Text(
+                      'Tap to choose',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+        ),
       ),
     );
   }
