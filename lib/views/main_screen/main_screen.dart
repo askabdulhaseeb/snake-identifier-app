@@ -13,10 +13,10 @@ class MainScreen extends StatelessWidget {
   static const String routeName = '/main';
   @override
   Widget build(BuildContext context) {
-    final UserRole role = (Provider.of<UserProvider>(context, listen: false)
-                .user(AuthMethods.uid) ??
-            AppUser(uid: '', email: '', role: UserRole.user))
-        .role;
+    final UserRole role =
+        (Provider.of<UserProvider>(context).user(AuthMethods.uid) ??
+                AppUser(uid: '', email: '', role: UserRole.user))
+            .role;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dashboard'),

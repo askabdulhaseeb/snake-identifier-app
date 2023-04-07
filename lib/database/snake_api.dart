@@ -40,6 +40,14 @@ class SnakeAPI {
     }
   }
 
+  Future<void> deleteSnake(String id) async {
+    try {
+      await _instance.collection(_collection).doc(id).delete();
+    } catch (e) {
+      CustomToast.errorToast(message: e.toString());
+    }
+  }
+
   Future<List<Snake>> allSnakes() async {
     final List<Snake> snakes = <Snake>[];
     try {

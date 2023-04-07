@@ -2,6 +2,7 @@
     package="com.example.snakeapp">
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <!-- Provide required visibility configuration for API level 30 and above -->
     <queries>
       <intent>

@@ -26,10 +26,7 @@ class SnakeDetailScreen extends StatelessWidget {
                           EditSnakeScreen(snake: snake),
                     ));
                   },
-                  child: const Text(
-                    'Edit Snake',
-                    style: TextStyle(color: Colors.white),
-                  ),
+                  child: const Text('Edit Snake'),
                 ),
         ],
       ),

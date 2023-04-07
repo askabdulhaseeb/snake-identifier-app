@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
       child: Consumer<AppThemeProvider>(
           builder: (BuildContext context, AppThemeProvider themePro, _) {
         return MaterialApp(
-          debugShowCheckedModeBanner: false,
+          // debugShowCheckedModeBanner: false,
           title: 'Snakes Info',
           theme: AppThemes.light,
           darkTheme: AppThemes.dark,

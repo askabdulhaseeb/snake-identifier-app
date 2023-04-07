@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
@@ -54,6 +54,7 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('Add')),
       body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Form(
@@ -266,13 +267,13 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
   }
 
   onImagePick() async {
-    final bool isGranted = await _request();
-    if (!isGranted) return null;
-    final FilePickerResult? temp = await FilePicker.platform
-        .pickFiles(allowMultiple: false, type: FileType.image);
+    // final bool isGranted = await _request();
+    // if (!isGranted) return null;
+    final ImagePicker picker = ImagePicker();
+    final XFile? temp = await picker.pickImage(source: ImageSource.gallery);
     if (temp == null) return;
     setState(() {
-      file = File(temp.paths.first!);
+      file = File(temp.path);
     });
   }
 

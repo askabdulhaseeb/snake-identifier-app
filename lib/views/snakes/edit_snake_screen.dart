@@ -12,6 +12,7 @@ import '../../widgets/custom_widgets/custom_title_textformfield.dart';
 import '../../widgets/custom_widgets/show_loading.dart';
 import '../../widgets/custom_widgets/text_tag_widget.dart';
 import '../main_screen/main_screen.dart';
+import 'snakes_screen.dart';
 
 class EditSnakeScreen extends StatefulWidget {
   const EditSnakeScreen({required this.snake, Key? key}) : super(key: key);
@@ -31,6 +32,7 @@ class _EditSnakeScreenState extends State<EditSnakeScreen> {
   late List<String> properties;
   VenomousLevel level = VenomousLevel.dangerouslyVenomous;
   bool _isLoading = false;
+  bool _isDeleting = false;
 
   @override
   void initState() {
@@ -56,7 +58,103 @@ class _EditSnakeScreenState extends State<EditSnakeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Edit Snake')),
+      appBar: AppBar(
+        title: const Text('Edit Snake'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) =>
+                    StatefulBuilder(builder: (BuildContext context, setState) {
+                  return Dialog(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          const Text(
+                            'Delete Snake',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.all(16),
+                            child: Divider(),
+                          ),
+                          const Text(
+                            'Do you ready want to delete this snake, once you delete it, we might remove all detail about this snake forever',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          _isDeleting
+                              ? const ShowLoading()
+                              : Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: CustomElevatedButton(
+                                        title: 'Cancel',
+                                        textColor:
+                                            Theme.of(context).primaryColor,
+                                        bgColor: Colors.transparent,
+                                        border: Border.all(
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                        onTap: () =>
+                                            Navigator.of(context).pop(),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    Expanded(
+                                      child: CustomElevatedButton(
+                                        title: 'Delete',
+                                        bgColor: Colors.red,
+                                        onTap: () async {
+                                          try {
+                                            setState(() {
+                                              _isDeleting = true;
+                                            });
+                                            await SnakeAPI()
+                                                .deleteSnake(widget.snake.sid);
+                                            if (!mounted) return;
+                                            await Provider.of<SnakeProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .refresh();
+                                            if (!mounted) return;
+                                            Navigator.of(context)
+                                                .pushNamedAndRemoveUntil(
+                                                    MainScreen.routeName,
+                                                    (Route<dynamic> route) =>
+                                                        false);
+                                          } catch (e) {
+                                            setState(() {
+                                              _isDeleting = false;
+                                            });
+                                          }
+                                        },
+                                      ),
+                                    )
+                                  ],
+                                )
+                        ],
+                      ),
+                    ),
+                  );
+                }),
+              );
+            },
+            child: const Text(
+              'Delete Snake',
+              style: TextStyle(color: Colors.red),
+            ),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Padding(
