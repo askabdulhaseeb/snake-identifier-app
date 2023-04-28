@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../../database/snake_api.dart';
@@ -8,6 +11,7 @@ import '../../models/snake.dart';
 import '../../providers/snake_provider.dart';
 import '../../utilities/custom_validator.dart';
 import '../../widgets/custom_widgets/custom_elevated_button.dart';
+import '../../widgets/custom_widgets/custom_network_change_img_box.dart';
 import '../../widgets/custom_widgets/custom_title_textformfield.dart';
 import '../../widgets/custom_widgets/show_loading.dart';
 import '../../widgets/custom_widgets/text_tag_widget.dart';
@@ -30,6 +34,7 @@ class _EditSnakeScreenState extends State<EditSnakeScreen> {
   final TextEditingController _property = TextEditingController();
   late List<String> tags;
   late List<String> properties;
+  File? file;
   VenomousLevel level = VenomousLevel.dangerouslyVenomous;
   bool _isLoading = false;
   bool _isDeleting = false;
@@ -163,6 +168,18 @@ class _EditSnakeScreenState extends State<EditSnakeScreen> {
             key: key,
             child: Column(
               children: <Widget>[
+                CustomNetworkChangeImageBox(
+                  url: widget.snake.imageURL[0],
+                  onTap: () async {
+                    final ImagePicker picker = ImagePicker();
+                    final XFile? temp =
+                        await picker.pickImage(source: ImageSource.gallery);
+                    if (temp == null) return;
+                    setState(() {
+                      file = File(temp.path);
+                    });
+                  },
+                ),
                 const SizedBox(height: 20),
                 CustomTitleTextFormField(
                   controller: _name,
@@ -321,6 +338,11 @@ class _EditSnakeScreenState extends State<EditSnakeScreen> {
                           setState(() {
                             _isLoading = true;
                           });
+                          if (file != null) {
+                            final String? url =
+                                await SnakeAPI().uploadPhoto(file: file!);
+                            if (url != null) widget.snake.imageURL[0] = url;
+                          }
                           widget.snake.name = _name.text.trim();
                           widget.snake.scientificName =
                               _scientificName.text.trim();

@@ -4,7 +4,7 @@ class CustomNetworkChangeImageBox extends StatelessWidget {
   const CustomNetworkChangeImageBox({
     required this.onTap,
     this.url,
-    this.title = 'Upload Image',
+    this.title = 'Choose Image',
     this.size = 80,
     Key? key,
   }) : super(key: key);

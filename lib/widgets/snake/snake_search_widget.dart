@@ -53,7 +53,7 @@ class _SnakeSearchWidgetState extends State<SnakeSearchWidget> {
                             ),
                           ),
                           const SizedBox(width: 10),
-                          Text(snakes[0].name),
+                          Text(snakes[index].name),
                         ],
                       ),
                     ),
