@@ -35,7 +35,7 @@ class SignInScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.8,
                       child: FittedBox(
                         child: Text(
-                          'EcoHerp',
+                          'Snake Identification',
                           style: TextStyle(
                             fontWeight: FontWeight.w800,
                             color: Theme.of(context).primaryColor,
@@ -46,7 +46,7 @@ class SignInScreen extends StatelessWidget {
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
-                        'EcoHerp helps you to identifier different types of snakes and also can compare them',
+                        'Snake Identification helps you to identifier different types of snakes and also can compare them',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 16,
@@ -55,7 +55,7 @@ class SignInScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
-                     CustomShadowBgWidget(
+                    CustomShadowBgWidget(
                       child: Consumer<MailAuthProvider>(
                         builder: (
                           BuildContext context,
