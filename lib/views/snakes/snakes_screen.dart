@@ -21,15 +21,23 @@ class SnakesScreen extends StatelessWidget {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
+        extendBodyBehindAppBar: true,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           actions: <Widget>[
             TextButton(
               onPressed: () =>
                   Navigator.of(context).pushNamed(SnakeCompareScreen.routeName),
-              child: const Text(
-                'Campare',
-                style: TextStyle(color: Colors.white),
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.black38,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Text(
+                  'Campare',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],

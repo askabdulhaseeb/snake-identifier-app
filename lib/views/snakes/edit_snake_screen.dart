@@ -35,6 +35,7 @@ class _EditSnakeScreenState extends State<EditSnakeScreen> {
   late List<String> tags;
   late List<String> properties;
   File? file;
+  File? scaleFile;
   VenomousLevel level = VenomousLevel.dangerouslyVenomous;
   bool _isLoading = false;
   bool _isDeleting = false;
@@ -170,6 +171,7 @@ class _EditSnakeScreenState extends State<EditSnakeScreen> {
               children: <Widget>[
                 CustomNetworkChangeImageBox(
                   url: widget.snake.imageURL[0],
+                  file: file,
                   onTap: () async {
                     final ImagePicker picker = ImagePicker();
                     final XFile? temp =
@@ -201,6 +203,27 @@ class _EditSnakeScreenState extends State<EditSnakeScreen> {
                   keyboardType: TextInputType.number,
                   readOnly: _isLoading,
                   validator: (String? value) => CustomValidator.isEmpty(value),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () => onScaleChoose(),
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          border: Border.all(),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Text('Choose Snake Scale'),
+                      ),
+                    ),
+                    CustomNetworkChangeImageBox(
+                      url: widget.snake.scaleURL,
+                      file: scaleFile,
+                      onTap: () async => await onScaleChoose(),
+                    ),
+                  ],
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -343,6 +366,12 @@ class _EditSnakeScreenState extends State<EditSnakeScreen> {
                                 await SnakeAPI().uploadPhoto(file: file!);
                             if (url != null) widget.snake.imageURL[0] = url;
                           }
+                          if (scaleFile != null) {
+                            final String? url =
+                                await SnakeAPI().uploadPhoto(file: scaleFile!);
+                            if (url != null) widget.snake.scaleURL = url;
+                          }
+
                           widget.snake.name = _name.text.trim();
                           widget.snake.scientificName =
                               _scientificName.text.trim();
@@ -369,5 +398,16 @@ class _EditSnakeScreenState extends State<EditSnakeScreen> {
         ),
       ),
     );
+  }
+
+  onScaleChoose() async {
+    // final bool isGranted = await _request();
+    // if (!isGranted) return null;
+    final ImagePicker picker = ImagePicker();
+    final XFile? temp = await picker.pickImage(source: ImageSource.gallery);
+    if (temp == null) return;
+    setState(() {
+      scaleFile = File(temp.path);
+    });
   }
 }

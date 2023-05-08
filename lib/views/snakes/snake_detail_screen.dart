@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../database/auth_methods.dart';
 import '../../models/snake.dart';
+import '../../widgets/custom_widgets/custom_network_image.dart';
 import '../../widgets/custom_widgets/custom_url_slider.dart';
 import '../../widgets/custom_widgets/text_tag_widget.dart';
+import '../../widgets/snake/snake_scale_url_not_available.dart';
 import 'edit_snake_screen.dart';
 
 class SnakeDetailScreen extends StatelessWidget {
@@ -56,6 +58,17 @@ class SnakeDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text('Average Length: ${snake.averageLengthCM}cm'),
+                  const SizedBox(height: 8),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: SizedBox(
+                      height: 120,
+                      width: 120,
+                      child: snake.scaleURL.isEmpty
+                          ? const SnakeScaleUrlNotAvailable()
+                          : CustomNetworkImage(imageURL: snake.scaleURL),
+                    ),
+                  ),
                   const SizedBox(height: 8),
                   const Divider(),
                   Row(

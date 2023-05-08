@@ -40,6 +40,7 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
   final GlobalKey<FormState> key = GlobalKey<FormState>();
 
   File? file;
+  File? scaleFile;
 
   List<VenomousLevel> venomous = <VenomousLevel>[
     VenomousLevel.dangerouslyVenomous,
@@ -86,6 +87,27 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
                   keyboardType: TextInputType.number,
                   readOnly: _isLoading,
                   validator: (String? value) => CustomValidator.isEmpty(value),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () => onScaleChoose(),
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          border: Border.all(),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Text('Choose Snake Scale'),
+                      ),
+                    ),
+                    CustomFileImageBox(
+                      file: scaleFile,
+                      title: 'Choose Scale',
+                      onTap: () => onScaleChoose(),
+                    ),
+                  ],
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -226,12 +248,22 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
                             });
                             return;
                           }
+                          if (file == null) {
+                            CustomToast.errorToast(
+                                message: 'Select Snake Scale');
+                            setState(() {
+                              _isLoading = false;
+                            });
+                            return;
+                          }
                           setState(() {
                             _isLoading = true;
                           });
                           final String? url =
                               await SnakeAPI().uploadPhoto(file: file!);
-                          if (file == null) {
+                          final String? scaleURL =
+                              await SnakeAPI().uploadPhoto(file: scaleFile!);
+                          if (file == null || scaleURL == null) {
                             CustomToast.errorToast(
                                 message: 'Photo Upload issue');
                             setState(() {
@@ -245,6 +277,7 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
                             imageURL: <String>[url!],
                             averageLengthCM:
                                 double.tryParse(_length.text.trim()) ?? 0.0,
+                            scaleURL: scaleURL,
                             tags: tags,
                             level: level,
                             properties: properties,
@@ -264,6 +297,17 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
         ),
       ),
     );
+  }
+
+  onScaleChoose() async {
+    // final bool isGranted = await _request();
+    // if (!isGranted) return null;
+    final ImagePicker picker = ImagePicker();
+    final XFile? temp = await picker.pickImage(source: ImageSource.gallery);
+    if (temp == null) return;
+    setState(() {
+      scaleFile = File(temp.path);
+    });
   }
 
   onImagePick() async {

@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-
+import 'package:flutter/foundation.dart';
 import '../database/auth_methods.dart';
 import '../database/user_api.dart';
 import '../models/app_user.dart';
@@ -11,6 +10,9 @@ class UserProvider extends ChangeNotifier {
 
   AppUser? user(String uid) {
     int index = _indexOf(uid);
+    if (kDebugMode) {
+      print('$uid - index:$index');
+    }
     return index < 0 ? null : _users[index];
   }
 
@@ -46,7 +48,8 @@ class UserProvider extends ChangeNotifier {
   }
 
   int _indexOf(String uid) {
-    int index = _users.indexWhere((AppUser element) => element.uid == uid);
+    int index = _users
+        .indexWhere((AppUser element) => element.uid.trim() == uid.trim());
     return index;
   }
 }

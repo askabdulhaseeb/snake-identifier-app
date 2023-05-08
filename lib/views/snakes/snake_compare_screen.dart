@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../models/snake.dart';
 import '../../widgets/custom_widgets/custom_network_image.dart';
+import '../../widgets/snake/snake_scale_url_not_available.dart';
 import '../../widgets/snake/snake_search_widget.dart';
 
 class SnakeCompareScreen extends StatefulWidget {
@@ -94,6 +95,39 @@ class _SnakeCompareScreenState extends State<SnakeCompareScreen> {
                         ),
                         const SizedBox(height: 10),
                         _Length(snake1: snake1, snake2: snake2),
+                        const SizedBox(height: 16),
+                        Text(
+                          'Scale',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: SizedBox(
+                                height: 120,
+                                width: 120,
+                                child: (snake1?.scaleURL ?? '').isEmpty
+                                    ? const SnakeScaleUrlNotAvailable()
+                                    : CustomNetworkImage(
+                                        imageURL: snake1?.scaleURL ?? ''),
+                              ),
+                            ),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: SizedBox(
+                                height: 120,
+                                width: 120,
+                                child: (snake2?.scaleURL ?? '').isEmpty
+                                    ? const SnakeScaleUrlNotAvailable()
+                                    : CustomNetworkImage(
+                                        imageURL: snake2?.scaleURL ?? ''),
+                              ),
+                            ),
+                          ],
+                        ),
                         const SizedBox(height: 16),
                         Text(
                           'Venomous Level',

@@ -35,7 +35,7 @@ class SignInScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.8,
                       child: FittedBox(
                         child: Text(
-                          'Snake Identification',
+                          'Australian snake identification',
                           style: TextStyle(
                             fontWeight: FontWeight.w800,
                             color: Theme.of(context).primaryColor,
@@ -46,7 +46,7 @@ class SignInScreen extends StatelessWidget {
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
-                        'Snake Identification helps you to identifier different types of snakes and also can compare them',
+                        'Australian snake identification helps you to identifier different types of snakes and also can compare them',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 16,

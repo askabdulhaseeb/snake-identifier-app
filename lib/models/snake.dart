@@ -13,10 +13,12 @@ class Snake {
     required this.tags,
     required this.level,
     required this.properties,
+    String? scaleURL,
     String? sid,
     String? uploadedBy,
     List<EditHistory>? history,
   })  : sid = sid ?? AuthMethods.uniqueID,
+        scaleURL = scaleURL ?? '',
         uploadedBy = uploadedBy ?? AuthMethods.uid,
         history = history ?? <EditHistory>[];
 
@@ -25,6 +27,7 @@ class Snake {
   String scientificName;
   final List<String> imageURL;
   double averageLengthCM;
+  String scaleURL;
   List<String> tags;
   VenomousLevel level;
   List<String> properties;
@@ -38,6 +41,7 @@ class Snake {
       'scientific_name': scientificName,
       'image_url': imageURL,
       'average_length_cm': averageLengthCM,
+      'scale_url': scaleURL,
       'tags': tags,
       'level': level.json,
       'properties': properties,
@@ -45,11 +49,13 @@ class Snake {
       'history': history.map((EditHistory e) => e.toMap()).toList(),
     };
   }
+
   Map<String, dynamic> updateSnake() {
     return <String, dynamic>{
       'name': name,
       'scientific_name': scientificName,
       'average_length_cm': averageLengthCM,
+      'scale_url': scaleURL,
       'tags': tags,
       'level': level.json,
       'properties': properties,
@@ -70,6 +76,7 @@ class Snake {
       uploadedBy: doc.data()?['name'] ?? 'uploaded_by',
       scientificName: doc.data()?['scientific_name'] ?? '',
       imageURL: List<String>.from((doc.data()?['image_url'] ?? <String>[])),
+      scaleURL: doc.data()?['scale_url'] ?? '',
       averageLengthCM: doc.data()?['average_length_cm'] ?? 0.0,
       tags: List<String>.from((doc.data()?['tags'] ?? <String>[])),
       level: VenomousLevelConvertor().toEnum(

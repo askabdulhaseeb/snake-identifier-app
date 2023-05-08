@@ -1,14 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class CustomNetworkChangeImageBox extends StatelessWidget {
   const CustomNetworkChangeImageBox({
     required this.onTap,
+    required this.file,
     this.url,
     this.title = 'Choose Image',
     this.size = 80,
     Key? key,
   }) : super(key: key);
   final String? url;
+  final File? file;
   final String title;
   final VoidCallback onTap;
   final double size;
@@ -24,10 +28,13 @@ class CustomNetworkChangeImageBox extends StatelessWidget {
               height: size,
               width: size,
               color: Theme.of(context).primaryColor,
-              child: url == null || url == ''
+              child: file!=null?SizedBox(
+                      height: double.infinity,
+                      width: double.infinity,
+                      child: Image.file(file!, fit: BoxFit.cover),
+                    ):  url == null || url == ''
                   ? const FittedBox(
-                    child: Icon(Icons.person,color: Colors.white)
-                  )
+                      child: Icon(Icons.person, color: Colors.white))
                   : SizedBox(
                       height: double.infinity,
                       width: double.infinity,
