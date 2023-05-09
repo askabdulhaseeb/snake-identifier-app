@@ -27,9 +27,11 @@ class DashboardTile extends StatelessWidget {
         onTap: () async {
           if (tile.hasScreen) {
             Navigator.of(context).pushNamed(tile.routeName);
-          } else if (tile == DashboardTileEnum.emergeny) {
-            await launchURL(Uri(scheme: 'tel', path: tile.routeName));
-          } else if (tile == DashboardTileEnum.theme) {
+          }
+          //  else if (tile == DashboardTileEnum.emergeny) {
+          //   await launchURL(Uri(scheme: 'tel', path: tile.routeName));
+          // }
+           else if (tile == DashboardTileEnum.theme) {
             Provider.of<AppThemeProvider>(context, listen: false).toggleTheme();
           } else {
             await launchURL(Uri.parse(tile.routeName));

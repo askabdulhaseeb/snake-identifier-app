@@ -6,7 +6,7 @@ import '../views/user_screens/user_search_screen.dart';
 enum DashboardTileEnum {
   snakes('Snakes', AppImages.snakes, true, SnakesScreen.routeName),
   compare('Compare', AppImages.compare, true, SnakeCompareScreen.routeName),
-  emergeny('Emergency', AppImages.emergency, false, '000'),
+  emergeny('Emergency', AppImages.emergency, false, 'https://stjohnwa.com.au/online-resources/first-aid-information-and-resources/snake-bite'),
   comunity('Comunity', AppImages.comunity, false,
       'https://m.facebook.com/groups/snakeidentificationaustralia/?ref=share&mibextid=ykz3hl'),
   user('Search User', AppImages.searchUser, true, UserSearchScreen.routeName),
