@@ -13,7 +13,8 @@ class DashboardGridview extends StatelessWidget {
       DashboardTileEnum.compare,
       DashboardTileEnum.emergeny,
       DashboardTileEnum.comunity,
-      DashboardTileEnum.user,
+      // DashboardTileEnum.user,
+      DashboardTileEnum.infoPDF,
       DashboardTileEnum.theme,
     ];
     return GridView.builder(

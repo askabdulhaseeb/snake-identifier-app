@@ -31,7 +31,7 @@ class DashboardTile extends StatelessWidget {
           //  else if (tile == DashboardTileEnum.emergeny) {
           //   await launchURL(Uri(scheme: 'tel', path: tile.routeName));
           // }
-           else if (tile == DashboardTileEnum.theme) {
+          else if (tile == DashboardTileEnum.theme) {
             Provider.of<AppThemeProvider>(context, listen: false).toggleTheme();
           } else {
             await launchURL(Uri.parse(tile.routeName));
@@ -80,7 +80,14 @@ class DashboardTile extends StatelessWidget {
                                 ),
                               );
                             })
-                          : Image.asset(tile.image),
+                          : tile == DashboardTileEnum.infoPDF
+                              ? const FittedBox(
+                                  child: Icon(
+                                    Icons.picture_as_pdf_outlined,
+                                    color: Colors.black,
+                                  ),
+                                )
+                              : Image.asset(tile.image),
                     ),
                   ),
                   tile == DashboardTileEnum.theme
