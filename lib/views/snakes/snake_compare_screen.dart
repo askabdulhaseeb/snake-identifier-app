@@ -128,6 +128,13 @@ class _SnakeCompareScreenState extends State<SnakeCompareScreen> {
                             ),
                           ],
                         ),
+                        const SizedBox(height: 24),
+                        Text(
+                          'Other Images',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const SizedBox(height: 10),
+                        _OtherImageSection(snake1: snake1, snake2: snake2),
                         const SizedBox(height: 16),
                         Text(
                           'Venomous Level',
@@ -161,6 +168,119 @@ class _SnakeCompareScreenState extends State<SnakeCompareScreen> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _OtherImageSection extends StatelessWidget {
+  const _OtherImageSection({
+    required this.snake1,
+    required this.snake2,
+    super.key,
+  });
+  final Snake? snake1;
+  final Snake? snake2;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Container(
+              height: 120,
+              width: 120,
+              decoration: BoxDecoration(
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: CustomNetworkImage(imageURL: snake1?.image1 ?? ''),
+            ),
+            Container(
+              height: 120,
+              width: 120,
+              decoration: BoxDecoration(
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: CustomNetworkImage(imageURL: snake2?.image1 ?? ''),
+            )
+          ],
+        ),
+        const SizedBox(height: 16),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Container(
+              height: 120,
+              width: 120,
+              decoration: BoxDecoration(
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: CustomNetworkImage(imageURL: snake1?.image2 ?? ''),
+            ),
+            Container(
+              height: 120,
+              width: 120,
+              decoration: BoxDecoration(
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: CustomNetworkImage(imageURL: snake2?.image2 ?? ''),
+            )
+          ],
+        ),
+        const SizedBox(height: 16),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Container(
+              height: 120,
+              width: 120,
+              decoration: BoxDecoration(
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: CustomNetworkImage(imageURL: snake1?.image3 ?? ''),
+            ),
+            Container(
+              height: 120,
+              width: 120,
+              decoration: BoxDecoration(
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: CustomNetworkImage(imageURL: snake2?.image3 ?? ''),
+            )
+          ],
+        ),
+        const SizedBox(height: 16),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Container(
+              height: 120,
+              width: 120,
+              decoration: BoxDecoration(
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: CustomNetworkImage(imageURL: snake1?.image4 ?? ''),
+            ),
+            Container(
+              height: 120,
+              width: 120,
+              decoration: BoxDecoration(
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: CustomNetworkImage(imageURL: snake2?.image4 ?? ''),
+            )
+          ],
+        ),
+      ],
     );
   }
 }
@@ -238,30 +358,30 @@ class _Name extends StatelessWidget {
         Column(
           children: <Widget>[
             Text(
-              snake1!.name,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Text(
               snake1!.scientificName,
               style: const TextStyle(
-                color: Colors.grey,
+                fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.italic,
               ),
+            ),
+            Text(
+              snake1!.name,
+              style: const TextStyle(color: Colors.grey),
             ),
           ],
         ),
         Column(
           children: <Widget>[
             Text(
-              snake2!.name,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Text(
               snake2!.scientificName,
               style: const TextStyle(
-                color: Colors.grey,
+                fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.italic,
               ),
+            ),
+            Text(
+              snake2!.name,
+              style: const TextStyle(color: Colors.grey),
             ),
           ],
         )

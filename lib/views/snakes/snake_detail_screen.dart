@@ -16,7 +16,7 @@ class SnakeDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(snake.name),
+        title: Text(snake.scientificName),
         actions: <Widget>[
           AuthMethods.getCurrentUser == null
               ? const SizedBox()
@@ -44,17 +44,17 @@ class SnakeDetailScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
+                    snake.scientificName,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                  Text(
                     snake.name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  Text(
-                    snake.scientificName,
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontStyle: FontStyle.italic,
-                    ),
+                    style: const TextStyle(color: Colors.grey),
                   ),
                   const SizedBox(height: 8),
                   Text('Average Length: ${snake.averageLengthCM}cm'),
@@ -67,6 +67,49 @@ class SnakeDetailScreen extends StatelessWidget {
                       child: snake.scaleURL.isEmpty
                           ? const SnakeScaleUrlNotAvailable()
                           : CustomNetworkImage(imageURL: snake.scaleURL),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    margin: const EdgeInsets.symmetric(vertical: 6),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: Colors.grey.shade300,
+                      ),
+                    ),
+                    child: SizedBox(
+                      height: 140,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        primary: false,
+                        itemCount: 4,
+                        separatorBuilder: (_, __) => const SizedBox(width: 10),
+                        itemBuilder: (_, int index) => ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: SizedBox(
+                            height: 120,
+                            width: 120,
+                            child: snake.scaleURL.isEmpty
+                                ? SnakeScaleUrlNotAvailable(
+                                    title: 'No Image ${index + 1}',
+                                  )
+                                : CustomNetworkImage(
+                                    imageURL: index == 0
+                                        ? snake.image1
+                                        : index == 1
+                                            ? snake.image2
+                                            : index == 2
+                                                ? snake.image3
+                                                : snake.image4),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 8),

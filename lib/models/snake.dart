@@ -14,11 +14,19 @@ class Snake {
     required this.level,
     required this.properties,
     String? scaleURL,
+    String? image1,
+    String? image2,
+    String? image3,
+    String? image4,
     String? sid,
     String? uploadedBy,
     List<EditHistory>? history,
   })  : sid = sid ?? AuthMethods.uniqueID,
         scaleURL = scaleURL ?? '',
+        image1 = image1 ?? '',
+        image2 = image2 ?? '',
+        image3 = image3 ?? '',
+        image4 = image4 ?? '',
         uploadedBy = uploadedBy ?? AuthMethods.uid,
         history = history ?? <EditHistory>[];
 
@@ -28,6 +36,10 @@ class Snake {
   final List<String> imageURL;
   double averageLengthCM;
   String scaleURL;
+  String image1;
+  String image2;
+  String image3;
+  String image4;
   List<String> tags;
   VenomousLevel level;
   List<String> properties;
@@ -42,6 +54,10 @@ class Snake {
       'image_url': imageURL,
       'average_length_cm': averageLengthCM,
       'scale_url': scaleURL,
+      'image_url_1': image1,
+      'image_url_2': image2,
+      'image_url_3': image3,
+      'image_url_4': image4,
       'tags': tags,
       'level': level.json,
       'properties': properties,
@@ -56,6 +72,10 @@ class Snake {
       'scientific_name': scientificName,
       'average_length_cm': averageLengthCM,
       'scale_url': scaleURL,
+      'image_url_1': image1,
+      'image_url_2': image2,
+      'image_url_3': image3,
+      'image_url_4': image4,
       'tags': tags,
       'level': level.json,
       'properties': properties,
@@ -77,6 +97,10 @@ class Snake {
       scientificName: doc.data()?['scientific_name'] ?? '',
       imageURL: List<String>.from((doc.data()?['image_url'] ?? <String>[])),
       scaleURL: doc.data()?['scale_url'] ?? '',
+      image1: doc.data()?['image_url_1'] ?? '',
+      image2: doc.data()?['image_url_2'] ?? '',
+      image3: doc.data()?['image_url_3'] ?? '',
+      image4: doc.data()?['image_url_4'] ?? '',
       averageLengthCM: doc.data()?['average_length_cm'] ?? 0.0,
       tags: List<String>.from((doc.data()?['tags'] ?? <String>[])),
       level: VenomousLevelConvertor().toEnum(

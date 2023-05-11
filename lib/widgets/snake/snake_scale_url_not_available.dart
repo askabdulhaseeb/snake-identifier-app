@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SnakeScaleUrlNotAvailable extends StatelessWidget {
-  const SnakeScaleUrlNotAvailable({
-    super.key,
-  });
+  const SnakeScaleUrlNotAvailable({this.title = 'No Scale', super.key});
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +12,7 @@ class SnakeScaleUrlNotAvailable extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       alignment: Alignment.center,
-      child: const Text('No Scale'),
+      child: Text(title),
     );
   }
 }

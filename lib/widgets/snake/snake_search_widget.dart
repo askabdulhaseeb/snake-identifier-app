@@ -53,7 +53,18 @@ class _SnakeSearchWidgetState extends State<SnakeSearchWidget> {
                             ),
                           ),
                           const SizedBox(width: 10),
-                          Text(snakes[index].name),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(snakes[index].scientificName),
+                                Text(
+                                  snakes[index].name,
+                                  style: const TextStyle(color: Colors.grey),
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),

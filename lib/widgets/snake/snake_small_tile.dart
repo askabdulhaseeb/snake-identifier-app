@@ -76,19 +76,19 @@ class SnakeSmallTile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          snake.name,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                          snake.scientificName,
                           style: const TextStyle(
+                            fontStyle: FontStyle.italic,
                             fontSize: 18,
                             color: Colors.black,
                           ),
                         ),
                         Text(
-                          snake.scientificName,
+                          snake.name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                             color: Colors.grey,
-                            fontStyle: FontStyle.italic,
                           ),
                         ),
                       ],

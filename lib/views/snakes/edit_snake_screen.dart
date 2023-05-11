@@ -36,6 +36,11 @@ class _EditSnakeScreenState extends State<EditSnakeScreen> {
   late List<String> properties;
   File? file;
   File? scaleFile;
+  File? image1;
+  File? image2;
+  File? image3;
+  File? image4;
+
   VenomousLevel level = VenomousLevel.dangerouslyVenomous;
   bool _isLoading = false;
   bool _isDeleting = false;
@@ -234,6 +239,92 @@ class _EditSnakeScreenState extends State<EditSnakeScreen> {
                       color: Colors.grey.shade300,
                     ),
                   ),
+                  child: Column(
+                    children: <Widget>[
+                      const SizedBox(height: 14),
+                      const Text(
+                        'Other Images Section',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 6),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          CustomNetworkChangeImageBox(
+                            url: widget.snake.image1,
+                            file: image1,
+                            title: 'Add Photo',
+                            onTap: () async {
+                              final ImagePicker picker = ImagePicker();
+                              final XFile? temp = await picker.pickImage(
+                                  source: ImageSource.gallery);
+                              if (temp == null) return;
+                              setState(() {
+                                image1 = File(temp.path);
+                              });
+                            },
+                          ),
+                          CustomNetworkChangeImageBox(
+                            url: widget.snake.image2,
+                            file: image2,
+                            title: 'Add Photo',
+                            onTap: () async {
+                              final ImagePicker picker = ImagePicker();
+                              final XFile? temp = await picker.pickImage(
+                                  source: ImageSource.gallery);
+                              if (temp == null) return;
+                              setState(() {
+                                image2 = File(temp.path);
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          CustomNetworkChangeImageBox(
+                            url: widget.snake.image3,
+                            file: image3,
+                            title: 'Add Photo',
+                            onTap: () async {
+                              final ImagePicker picker = ImagePicker();
+                              final XFile? temp = await picker.pickImage(
+                                  source: ImageSource.gallery);
+                              if (temp == null) return;
+                              setState(() {
+                                image3 = File(temp.path);
+                              });
+                            },
+                          ),
+                          CustomNetworkChangeImageBox(
+                            url: widget.snake.image4,
+                            file: image4,
+                            title: 'Add Photo',
+                            onTap: () async {
+                              final ImagePicker picker = ImagePicker();
+                              final XFile? temp = await picker.pickImage(
+                                  source: ImageSource.gallery);
+                              if (temp == null) return;
+                              setState(() {
+                                image4 = File(temp.path);
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  margin: const EdgeInsets.symmetric(vertical: 6),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: Colors.grey.shade300,
+                    ),
+                  ),
                   child: SizedBox(
                     width: double.infinity,
                     child: Column(
@@ -356,40 +447,7 @@ class _EditSnakeScreenState extends State<EditSnakeScreen> {
                     ? const ShowLoading()
                     : CustomElevatedButton(
                         title: 'Update Snake',
-                        onTap: () async {
-                          if (!key.currentState!.validate()) return;
-                          setState(() {
-                            _isLoading = true;
-                          });
-                          if (file != null) {
-                            final String? url =
-                                await SnakeAPI().uploadPhoto(file: file!);
-                            if (url != null) widget.snake.imageURL[0] = url;
-                          }
-                          if (scaleFile != null) {
-                            final String? url =
-                                await SnakeAPI().uploadPhoto(file: scaleFile!);
-                            if (url != null) widget.snake.scaleURL = url;
-                          }
-
-                          widget.snake.name = _name.text.trim();
-                          widget.snake.scientificName =
-                              _scientificName.text.trim();
-                          widget.snake.averageLengthCM =
-                              double.parse(_length.text.trim());
-                          widget.snake.level = level;
-                          widget.snake.tags = tags;
-                          widget.snake.properties = properties;
-                          widget.snake.history.add(EditHistory());
-                          await SnakeAPI().updateSnake(widget.snake);
-                          // ignore: use_build_context_synchronously
-                          Provider.of<SnakeProvider>(context, listen: false)
-                              .refresh();
-                          // ignore: use_build_context_synchronously
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              MainScreen.routeName,
-                              (Route<dynamic> route) => false);
-                        },
+                        onTap: () async => onUpdate(),
                       ),
                 SizedBox(height: MediaQuery.of(context).size.height / 2)
               ],
@@ -398,6 +456,51 @@ class _EditSnakeScreenState extends State<EditSnakeScreen> {
         ),
       ),
     );
+  }
+
+  onUpdate() async {
+    if (!key.currentState!.validate()) return;
+    setState(() {
+      _isLoading = true;
+    });
+    if (file != null) {
+      final String? url = await SnakeAPI().uploadPhoto(file: file!);
+      if (url != null) widget.snake.imageURL[0] = url;
+    }
+    if (scaleFile != null) {
+      final String? url = await SnakeAPI().uploadPhoto(file: scaleFile!);
+      if (url != null) widget.snake.scaleURL = url;
+    }
+    if (image1 != null) {
+      final String? url = await SnakeAPI().uploadPhoto(file: image1!);
+      if (url != null) widget.snake.image1 = url;
+    }
+    if (image2 != null) {
+      final String? url = await SnakeAPI().uploadPhoto(file: image2!);
+      if (url != null) widget.snake.image2 = url;
+    }
+    if (image3 != null) {
+      final String? url = await SnakeAPI().uploadPhoto(file: image3!);
+      if (url != null) widget.snake.image3 = url;
+    }
+    if (image4 != null) {
+      final String? url = await SnakeAPI().uploadPhoto(file: image4!);
+      if (url != null) widget.snake.image4 = url;
+    }
+
+    widget.snake.name = _name.text.trim();
+    widget.snake.scientificName = _scientificName.text.trim();
+    widget.snake.averageLengthCM = double.parse(_length.text.trim());
+    widget.snake.level = level;
+    widget.snake.tags = tags;
+    widget.snake.properties = properties;
+    widget.snake.history.add(EditHistory());
+    await SnakeAPI().updateSnake(widget.snake);
+    // ignore: use_build_context_synchronously
+    Provider.of<SnakeProvider>(context, listen: false).refresh();
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        MainScreen.routeName, (Route<dynamic> route) => false);
   }
 
   onScaleChoose() async {
