@@ -331,18 +331,6 @@ class _EditSnakeScreenState extends State<EditSnakeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         const SizedBox(height: 8),
-                        const Text(
-                          'Venomous Level',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const Text(
-                          'Tap to switch the Venomous Level',
-                          style: TextStyle(fontSize: 11, color: Colors.grey),
-                        ),
-                        const SizedBox(height: 8),
                         Wrap(
                           alignment: WrapAlignment.start,
                           children: venomous

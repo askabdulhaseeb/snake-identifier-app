@@ -136,11 +136,6 @@ class _SnakeCompareScreenState extends State<SnakeCompareScreen> {
                         const SizedBox(height: 10),
                         _OtherImageSection(snake1: snake1, snake2: snake2),
                         const SizedBox(height: 16),
-                        Text(
-                          'Venomous Level',
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                        const SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[

@@ -98,7 +98,7 @@ class DashboardTile extends StatelessWidget {
                                 ? 'System Theme Mode'
                                 : theme.themeMode == ThemeMode.dark
                                     ? 'Dark Mode'
-                                    : 'Loght Mode',
+                                    : 'Light Mode',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
