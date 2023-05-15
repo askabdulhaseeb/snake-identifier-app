@@ -35,7 +35,7 @@ class SnakesScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Text(
-                  'Campare',
+                  'Compare',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
