@@ -16,7 +16,6 @@ import '../../widgets/custom_widgets/custom_title_textformfield.dart';
 import '../../widgets/custom_widgets/show_loading.dart';
 import '../../widgets/custom_widgets/text_tag_widget.dart';
 import '../main_screen/main_screen.dart';
-import 'snakes_screen.dart';
 
 class EditSnakeScreen extends StatefulWidget {
   const EditSnakeScreen({required this.snake, Key? key}) : super(key: key);

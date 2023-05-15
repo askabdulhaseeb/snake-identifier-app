@@ -80,21 +80,14 @@ class DashboardTile extends StatelessWidget {
                                 ),
                               );
                             })
-                          : tile == DashboardTileEnum.infoPDF
-                              ? const FittedBox(
+                          : tile.icon != null
+                              ? FittedBox(
                                   child: Icon(
-                                    Icons.menu_book_rounded,
+                                    tile.icon,
                                     color: Colors.black,
                                   ),
                                 )
-                              : tile == DashboardTileEnum.emergeny
-                                  ? const FittedBox(
-                                      child: Icon(
-                                        Icons.add,
-                                        color: Colors.black,
-                                      ),
-                                    )
-                                  : Image.asset(tile.image),
+                              : Image.asset(tile.image),
                     ),
                   ),
                   tile == DashboardTileEnum.theme
