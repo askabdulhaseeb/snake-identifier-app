@@ -83,11 +83,18 @@ class DashboardTile extends StatelessWidget {
                           : tile == DashboardTileEnum.infoPDF
                               ? const FittedBox(
                                   child: Icon(
-                                    Icons.picture_as_pdf_outlined,
+                                    Icons.menu_book_rounded,
                                     color: Colors.black,
                                   ),
                                 )
-                              : Image.asset(tile.image),
+                              : tile == DashboardTileEnum.emergeny
+                                  ? const FittedBox(
+                                      child: Icon(
+                                        Icons.add,
+                                        color: Colors.black,
+                                      ),
+                                    )
+                                  : Image.asset(tile.image),
                     ),
                   ),
                   tile == DashboardTileEnum.theme

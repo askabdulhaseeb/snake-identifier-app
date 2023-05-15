@@ -83,7 +83,7 @@ class _SnakeCompareScreenState extends State<SnakeCompareScreen> {
                   : Column(
                       children: <Widget>[
                         Text(
-                          'Basic',
+                          'Snake',
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                         const SizedBox(height: 10),
@@ -97,7 +97,7 @@ class _SnakeCompareScreenState extends State<SnakeCompareScreen> {
                         _Length(snake1: snake1, snake2: snake2),
                         const SizedBox(height: 16),
                         Text(
-                          'Scale',
+                          'Scalation',
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                         const SizedBox(height: 10),

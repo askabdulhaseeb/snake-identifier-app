@@ -19,7 +19,7 @@ class MainScreen extends StatelessWidget {
             .role;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dashboard'),
+        title: const Text('Australian Snake Identification'),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
