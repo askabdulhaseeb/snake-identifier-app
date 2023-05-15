@@ -13,26 +13,35 @@ class Snake {
     required this.tags,
     required this.level,
     required this.properties,
+    String? description,
     String? scaleURL,
     String? image1,
     String? image2,
     String? image3,
     String? image4,
+    String? diet,
+    String? habitat,
+    String? coolStuff,
     String? sid,
     String? uploadedBy,
     List<EditHistory>? history,
   })  : sid = sid ?? AuthMethods.uniqueID,
+        description = description ?? '',
         scaleURL = scaleURL ?? '',
         image1 = image1 ?? '',
         image2 = image2 ?? '',
         image3 = image3 ?? '',
         image4 = image4 ?? '',
+        diet = diet ?? '',
+        habitat = habitat ?? '',
+        coolStuff = coolStuff ?? '',
         uploadedBy = uploadedBy ?? AuthMethods.uid,
         history = history ?? <EditHistory>[];
 
   final String sid;
   String name;
   String scientificName;
+  String description;
   final List<String> imageURL;
   double averageLengthCM;
   String scaleURL;
@@ -40,6 +49,9 @@ class Snake {
   String image2;
   String image3;
   String image4;
+  String diet;
+  String habitat;
+  String coolStuff;
   List<String> tags;
   VenomousLevel level;
   List<String> properties;
@@ -51,6 +63,7 @@ class Snake {
       'sid': sid,
       'name': name,
       'scientific_name': scientificName,
+      'description': description,
       'image_url': imageURL,
       'average_length_cm': averageLengthCM,
       'scale_url': scaleURL,
@@ -58,6 +71,9 @@ class Snake {
       'image_url_2': image2,
       'image_url_3': image3,
       'image_url_4': image4,
+      'diet': diet,
+      'habitat': habitat,
+      'cool_stuff': coolStuff,
       'tags': tags,
       'level': level.json,
       'properties': properties,
@@ -70,12 +86,16 @@ class Snake {
     return <String, dynamic>{
       'name': name,
       'scientific_name': scientificName,
+      'description': description,
       'average_length_cm': averageLengthCM,
       'scale_url': scaleURL,
       'image_url_1': image1,
       'image_url_2': image2,
       'image_url_3': image3,
       'image_url_4': image4,
+      'diet': diet,
+      'habitat': habitat,
+      'cool_stuff': coolStuff,
       'tags': tags,
       'level': level.json,
       'properties': properties,
@@ -95,12 +115,16 @@ class Snake {
       name: doc.data()?['name'] ?? '',
       uploadedBy: doc.data()?['name'] ?? 'uploaded_by',
       scientificName: doc.data()?['scientific_name'] ?? '',
+      description: doc.data()?['description'] ?? 'No Description',
       imageURL: List<String>.from((doc.data()?['image_url'] ?? <String>[])),
       scaleURL: doc.data()?['scale_url'] ?? '',
       image1: doc.data()?['image_url_1'] ?? '',
       image2: doc.data()?['image_url_2'] ?? '',
       image3: doc.data()?['image_url_3'] ?? '',
       image4: doc.data()?['image_url_4'] ?? '',
+      diet: doc.data()?['diet'] ?? '',
+      habitat: doc.data()?['habitat'] ?? '',
+      coolStuff: doc.data()?['cool_stuff'] ?? '',
       averageLengthCM: doc.data()?['average_length_cm'] ?? 0.0,
       tags: List<String>.from((doc.data()?['tags'] ?? <String>[])),
       level: VenomousLevelConvertor().toEnum(
