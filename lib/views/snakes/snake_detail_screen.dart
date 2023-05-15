@@ -59,6 +59,15 @@ class SnakeDetailScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text('Average Length: ${snake.averageLengthCM}cm'),
                   const SizedBox(height: 8),
+                  const Text(
+                    'Description',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(snake.description),
+                  const SizedBox(height: 8),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: SizedBox(
@@ -114,24 +123,41 @@ class SnakeDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   const Divider(),
-                  Row(
-                    children: <Widget>[
-                      const Text(
-                        'Venomous Level: ',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Expanded(
-                        child: Text(
-                          snake.level.title,
-                          style: TextStyle(
-                            color: snake.level.color,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
+                  Text(
+                    snake.level.title,
+                    style: TextStyle(
+                      color: snake.level.color,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 10),
+                  const Text(
+                    'Diet',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(snake.diet),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Habitat',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(snake.habitat),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Cool Stuff',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(snake.coolStuff),
+                  const SizedBox(height: 8),
                   const Text(
                     'Tags',
                     style: TextStyle(fontWeight: FontWeight.bold),

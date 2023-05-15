@@ -28,7 +28,11 @@ class EditSnakeScreen extends StatefulWidget {
 class _EditSnakeScreenState extends State<EditSnakeScreen> {
   late TextEditingController _name;
   late TextEditingController _scientificName;
+  late TextEditingController _decription;
   late TextEditingController _length;
+  late TextEditingController _diet;
+  late TextEditingController _habitat;
+  late TextEditingController _coolStuff;
   final TextEditingController _tag = TextEditingController();
   final TextEditingController _property = TextEditingController();
   late List<String> tags;
@@ -49,8 +53,12 @@ class _EditSnakeScreenState extends State<EditSnakeScreen> {
     super.initState();
     _name = TextEditingController(text: widget.snake.name);
     _scientificName = TextEditingController(text: widget.snake.scientificName);
+    _decription = TextEditingController(text: widget.snake.description);
     _length =
         TextEditingController(text: widget.snake.averageLengthCM.toString());
+    _diet = TextEditingController(text: widget.snake.diet);
+    _habitat = TextEditingController(text: widget.snake.habitat);
+    _coolStuff = TextEditingController(text: widget.snake.coolStuff);
     tags = widget.snake.tags;
     properties = widget.snake.properties;
     level = widget.snake.level;
@@ -202,6 +210,12 @@ class _EditSnakeScreenState extends State<EditSnakeScreen> {
                       CustomValidator.lessThen3(value),
                 ),
                 CustomTitleTextFormField(
+                  controller: _decription,
+                  title: 'Description',
+                  readOnly: _isLoading,
+                  validator: (String? value) => null,
+                ),
+                CustomTitleTextFormField(
                   controller: _length,
                   title: 'Average Length in CM',
                   keyboardType: TextInputType.number,
@@ -314,6 +328,24 @@ class _EditSnakeScreenState extends State<EditSnakeScreen> {
                       ),
                     ],
                   ),
+                ),
+                CustomTitleTextFormField(
+                  controller: _diet,
+                  title: 'Diet',
+                  readOnly: _isLoading,
+                  validator: (String? value) => null,
+                ),
+                CustomTitleTextFormField(
+                  controller: _habitat,
+                  title: 'Habitat',
+                  readOnly: _isLoading,
+                  validator: (String? value) => null,
+                ),
+                CustomTitleTextFormField(
+                  controller: _coolStuff,
+                  title: 'Cool Stuff',
+                  readOnly: _isLoading,
+                  validator: (String? value) => null,
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -477,7 +509,11 @@ class _EditSnakeScreenState extends State<EditSnakeScreen> {
 
     widget.snake.name = _name.text.trim();
     widget.snake.scientificName = _scientificName.text.trim();
+    widget.snake.description = _decription.text.trim();
     widget.snake.averageLengthCM = double.parse(_length.text.trim());
+    widget.snake.diet = _diet.text.trim();
+    widget.snake.habitat = _habitat.text.trim();
+    widget.snake.coolStuff = _coolStuff.text.trim();
     widget.snake.level = level;
     widget.snake.tags = tags;
     widget.snake.properties = properties;

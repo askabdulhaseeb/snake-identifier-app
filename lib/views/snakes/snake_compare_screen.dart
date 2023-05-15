@@ -90,6 +90,13 @@ class _SnakeCompareScreenState extends State<SnakeCompareScreen> {
                         _Name(snake1: snake1, snake2: snake2),
                         const SizedBox(height: 16),
                         Text(
+                          'Description',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const SizedBox(height: 10),
+                        _Description(snake1: snake1, snake2: snake2),
+                        const SizedBox(height: 16),
+                        Text(
                           'Length',
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
@@ -156,6 +163,27 @@ class _SnakeCompareScreenState extends State<SnakeCompareScreen> {
                         ),
                         const SizedBox(height: 10),
                         _Properties(snake1: snake1, snake2: snake2),
+                        const SizedBox(height: 16),
+                        Text(
+                          'Diet',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const SizedBox(height: 10),
+                        _Diet(snake1: snake1, snake2: snake2),
+                        const SizedBox(height: 16),
+                        Text(
+                          'Habitat',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const SizedBox(height: 10),
+                        _Habitat(snake1: snake1, snake2: snake2),
+                        const SizedBox(height: 16),
+                        Text(
+                          'Cool Stuff',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const SizedBox(height: 10),
+                        _CoolStuff(snake1: snake1, snake2: snake2),
                         const SizedBox(height: 40),
                       ],
                     ),
@@ -332,6 +360,102 @@ class _Length extends StatelessWidget {
         ),
         Text(
           'Average Length\n ${snake2!.averageLengthCM} CM',
+          textAlign: TextAlign.center,
+        )
+      ],
+    );
+  }
+}
+
+class _Diet extends StatelessWidget {
+  const _Diet({required this.snake1, required this.snake2});
+
+  final Snake? snake1;
+  final Snake? snake2;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Text(
+          snake1?.diet ?? 'No diet',
+          textAlign: TextAlign.center,
+        ),
+        Text(
+          snake2?.diet ?? 'No diet',
+          textAlign: TextAlign.center,
+        )
+      ],
+    );
+  }
+}
+
+class _Habitat extends StatelessWidget {
+  const _Habitat({required this.snake1, required this.snake2});
+
+  final Snake? snake1;
+  final Snake? snake2;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Text(
+          snake1?.habitat ?? 'No habitat',
+          textAlign: TextAlign.center,
+        ),
+        Text(
+          snake2?.habitat ?? 'No habitat',
+          textAlign: TextAlign.center,
+        )
+      ],
+    );
+  }
+}
+
+class _CoolStuff extends StatelessWidget {
+  const _CoolStuff({required this.snake1, required this.snake2});
+
+  final Snake? snake1;
+  final Snake? snake2;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Text(
+          snake1?.coolStuff ?? 'No cool Stuff',
+          textAlign: TextAlign.center,
+        ),
+        Text(
+          snake2?.coolStuff ?? 'No cool Stuff',
+          textAlign: TextAlign.center,
+        )
+      ],
+    );
+  }
+}
+
+class _Description extends StatelessWidget {
+  const _Description({required this.snake1, required this.snake2});
+
+  final Snake? snake1;
+  final Snake? snake2;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Text(
+          snake1?.description ?? 'No Description',
+          textAlign: TextAlign.center,
+        ),
+        Text(
+          snake2?.description ?? 'No Description',
           textAlign: TextAlign.center,
         )
       ],

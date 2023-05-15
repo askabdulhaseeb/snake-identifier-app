@@ -29,7 +29,11 @@ class AddSnakeScreen extends StatefulWidget {
 class _AddSnakeScreenState extends State<AddSnakeScreen> {
   final TextEditingController _name = TextEditingController();
   final TextEditingController _scientificName = TextEditingController();
+  final TextEditingController _decription = TextEditingController();
   final TextEditingController _length = TextEditingController();
+  final TextEditingController _diet = TextEditingController();
+  final TextEditingController _habitat = TextEditingController();
+  final TextEditingController _coolStuff = TextEditingController();
   final TextEditingController _tag = TextEditingController();
   final TextEditingController _property = TextEditingController();
   VenomousLevel level = VenomousLevel.dangerouslyVenomous;
@@ -85,6 +89,12 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
                   readOnly: _isLoading,
                   validator: (String? value) =>
                       CustomValidator.lessThen3(value),
+                ),
+                CustomTitleTextFormField(
+                  controller: _decription,
+                  title: 'Description',
+                  readOnly: _isLoading,
+                  validator: (String? value) => null,
                 ),
                 CustomTitleTextFormField(
                   controller: _length,
@@ -200,6 +210,24 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
                     ],
                   ),
                 ),
+                CustomTitleTextFormField(
+                  controller: _diet,
+                  title: 'Diet',
+                  readOnly: _isLoading,
+                  validator: (String? value) => null,
+                ),
+                CustomTitleTextFormField(
+                  controller: _habitat,
+                  title: 'Habitat',
+                  readOnly: _isLoading,
+                  validator: (String? value) => null,
+                ),
+                CustomTitleTextFormField(
+                  controller: _coolStuff,
+                  title: 'Cool Stuff',
+                  readOnly: _isLoading,
+                  validator: (String? value) => null,
+                ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   margin: const EdgeInsets.symmetric(vertical: 6),
@@ -215,7 +243,6 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         const SizedBox(height: 8),
-                       
                         Wrap(
                           alignment: WrapAlignment.start,
                           children: venomous
@@ -372,6 +399,7 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
     final Snake snake = Snake(
       name: _name.text.trim(),
       scientificName: _scientificName.text.trim(),
+      description: _decription.text.trim(),
       imageURL: <String>[url!],
       averageLengthCM: double.tryParse(_length.text.trim()) ?? 0.0,
       scaleURL: scaleURL,
@@ -379,6 +407,9 @@ class _AddSnakeScreenState extends State<AddSnakeScreen> {
       image2: image2URL,
       image3: image3URL,
       image4: image4URL,
+      diet: _diet.text.trim(),
+      habitat: _habitat.text.trim(),
+      coolStuff: _coolStuff.text.trim(),
       tags: tags,
       level: level,
       properties: properties,
