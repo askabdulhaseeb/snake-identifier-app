@@ -382,6 +382,7 @@ class _Diet extends StatelessWidget {
           snake1?.diet ?? 'No diet',
           textAlign: TextAlign.center,
         ),
+        const SizedBox(width: 48),
         Text(
           snake2?.diet ?? 'No diet',
           textAlign: TextAlign.center,
@@ -406,6 +407,7 @@ class _Habitat extends StatelessWidget {
           snake1?.habitat ?? 'No habitat',
           textAlign: TextAlign.center,
         ),
+         const SizedBox(width: 48),
         Text(
           snake2?.habitat ?? 'No habitat',
           textAlign: TextAlign.center,
@@ -430,6 +432,7 @@ class _CoolStuff extends StatelessWidget {
           snake1?.coolStuff ?? 'No cool Stuff',
           textAlign: TextAlign.center,
         ),
+         const SizedBox(width: 48),
         Text(
           snake2?.coolStuff ?? 'No cool Stuff',
           textAlign: TextAlign.center,
@@ -454,6 +457,7 @@ class _Description extends StatelessWidget {
           snake1?.description ?? 'No Description',
           textAlign: TextAlign.center,
         ),
+         const SizedBox(width: 48),
         Text(
           snake2?.description ?? 'No Description',
           textAlign: TextAlign.center,
