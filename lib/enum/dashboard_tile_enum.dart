@@ -12,7 +12,7 @@ enum DashboardTileEnum {
       'Compare', AppImages.compare, null, true, SnakeCompareScreen.routeName),
   emergeny('First Aid', '', Icons.add, false,
       'https://stjohnwa.com.au/online-resources/first-aid-information-and-resources/snake-bite'),
-  comunity('Comunity', '', Icons.facebook, false,
+  comunity('Community', '', Icons.facebook, false,
       'https://m.facebook.com/groups/snakeidentificationaustralia/?ref=share&mibextid=ykz3hl'),
   user('Search User', AppImages.searchUser, null, true,
       UserSearchScreen.routeName),

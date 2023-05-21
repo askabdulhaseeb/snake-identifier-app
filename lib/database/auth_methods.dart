@@ -53,35 +53,6 @@ class AuthMethods {
     }
   }
 
-  Future<bool> forgetPassword(String email) async {
-    try {
-      _auth.sendPasswordResetEmail(email: email.trim());
-      return true;
-    } catch (error) {
-      CustomToast.errorToast(message: error.toString());
-    }
-    return false;
-  }
-
-  Future<void> deleteAccount() async {
-    await FirebaseFirestore.instance.collection('users').doc(uid).delete();
-    final QuerySnapshot<Map<String, dynamic>> products = await FirebaseFirestore
-        .instance
-        .collection('products')
-        .where('uid', isEqualTo: uid)
-        .get();
-    if (products.docs.isNotEmpty) {
-      for (DocumentSnapshot<Map<String, dynamic>> doc in products.docs) {
-        await FirebaseFirestore.instance
-            .collection('products')
-            .doc(doc.data()?['pid'])
-            .delete();
-      }
-      await FirebaseStorage.instance.ref('products/$uid').delete();
-    }
-    await _auth.currentUser!.delete();
-  }
-
   Future<void> signOut(BuildContext context) async {
     await _auth.signOut();
     // ignore: use_build_context_synchronously
