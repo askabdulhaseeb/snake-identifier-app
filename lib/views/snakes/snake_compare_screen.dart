@@ -375,19 +375,25 @@ class _Diet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Text(
-          snake1?.diet ?? 'No diet',
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(width: 48),
-        Text(
-          snake2?.diet ?? 'No diet',
-          textAlign: TextAlign.center,
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Text(
+              snake1?.diet ?? 'No diet',
+              // textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(width: 48),
+          Expanded(
+            child: Text(
+              snake2?.diet ?? 'No diet',
+              // textAlign: TextAlign.center,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
@@ -400,19 +406,25 @@ class _Habitat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Text(
-          snake1?.habitat ?? 'No habitat',
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(width: 48),
-        Text(
-          snake2?.habitat ?? 'No habitat',
-          textAlign: TextAlign.center,
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Text(
+              snake1?.habitat ?? 'No habitat',
+              // textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(width: 48),
+          Expanded(
+            child: Text(
+              snake2?.habitat ?? 'No habitat',
+              // textAlign: TextAlign.center,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
@@ -425,19 +437,25 @@ class _CoolStuff extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Text(
-          snake1?.coolStuff ?? 'No cool Stuff',
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(width: 48),
-        Text(
-          snake2?.coolStuff ?? 'No cool Stuff',
-          textAlign: TextAlign.center,
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Text(
+              snake1?.coolStuff ?? 'No cool Stuff',
+              // textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(width: 48),
+          Expanded(
+            child: Text(
+              snake2?.coolStuff ?? 'No cool Stuff',
+              // textAlign: TextAlign.center,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
@@ -450,19 +468,25 @@ class _Description extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Text(
-          snake1?.description ?? 'No Description',
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(width: 48),
-        Text(
-          snake2?.description ?? 'No Description',
-          textAlign: TextAlign.center,
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Text(
+              snake1?.description ?? 'No Description',
+              // textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(width: 48),
+          Expanded(
+            child: Text(
+              snake2?.description ?? 'No Description',
+              // textAlign: TextAlign.center,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
